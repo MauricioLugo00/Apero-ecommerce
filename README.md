@@ -20,7 +20,7 @@ El proyecto **Apero** utiliza Django como su framework backend, con MySQL como b
 - **orders**: Gestiona los pedidos realizados por los clientes, incluyendo el estado de la compra y el historial de órdenes.
 - **store**: Maneja la visualización de productos, integración con las categorías y búsqueda.
 
->[!CAUTION]
+>[!IMPORTANT]
 > Mantén las migraciones de la base de datos actualizadas para evitar problemas con la gestión de productos y pedidos.
 
 ---
