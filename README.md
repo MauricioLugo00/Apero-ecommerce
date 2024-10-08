@@ -6,7 +6,7 @@ Apero es un e-commerce desarrollado con Django, que permite a los usuarios compr
 
 El proyecto **Apero** utiliza Django como su framework backend, con MySQL como base de datos, y plantillas HTML, CSS, JavaScript y Bootstrap para el frontend. Ofrece una tienda en línea donde los usuarios pueden personalizar vasos para bebidas, gestionar sus compras y acceder a diferentes funcionalidades como administración de cuentas y pedidos.
 
->[!TIP]
+>[!NOTE]
 > El enfoque del proyecto es brindar una experiencia de usuario fácil e intuitiva tanto para clientes como administradores.
 
 ---
@@ -20,7 +20,7 @@ El proyecto **Apero** utiliza Django como su framework backend, con MySQL como b
 - **orders**: Gestiona los pedidos realizados por los clientes, incluyendo el estado de la compra y el historial de órdenes.
 - **store**: Maneja la visualización de productos, integración con las categorías y búsqueda.
 
->[!IMPORTANT]
+>[!CAUTION]
 > Mantén las migraciones de la base de datos actualizadas para evitar problemas con la gestión de productos y pedidos.
 
 ---
@@ -41,7 +41,7 @@ Desde esta interfaz de administración, podrás:
 - **Configurar categorías**: Añadir o modificar categorías de productos.
 - **Gestionar usuarios**: Revisar información de las cuentas de usuario y asignar roles o permisos.
 
->[!NOTE] 
+>[!TIP] 
 > La interfaz de administración de Django es altamente personalizable y permite añadir o quitar opciones de gestión según tus necesidades.
 
 ---
