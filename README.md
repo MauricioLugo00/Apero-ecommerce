@@ -106,13 +106,6 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Actualizar cantidades de productos.
    - Pasar a la compra (checkout), donde el carrito se convierte en una orden.
 
-5. **Ecommerce (Gestionado por JuanJo)**:
-   Esta carpeta puede ser la aplicación principal o el contenedor donde se coordinan todas las otras aplicaciones.
-   **Funcionalidades comunes**:
-   - Configuración general del sitio (ajustes globales, como URLs principales, middleware, etc.).
-   - Puede ser el núcleo del proyecto, gestionando la estructura del sitio.
-   - Integración entre diferentes aplicaciones, como el carrito, el catálogo, cuentas de usuario, y otros módulos.
-
 6. **Orders (Gestionado por Juan Pablo)**:
    Esta aplicación gestiona todo lo relacionado con las órdenes de compra.
    **Funcionalidades comunes**:
