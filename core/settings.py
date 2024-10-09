@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     'accounts',
     'carts',
     'category',
-    'ecommerce',
     'orders',
     'store',
 ]
@@ -60,7 +59,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'aperodb',
         'USER': 'root',
-        'PASSWORD': '31261263Aa',
+        'PASSWORD': '0000',
         'HOST': 'localhost',  # O la dirección de tu servidor
         'PORT': '3306',       # O el puerto que uses
     }
