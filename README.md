@@ -16,7 +16,7 @@ El proyecto **Apero** utiliza Django como su framework backend, con MySQL como b
 - **accounts**: Gestión de usuarios, incluyendo registro, inicio de sesión y manejo de perfiles.
 - **carts**: Permite a los usuarios añadir productos a su carrito, actualizar cantidades y proceder al pago.
 - **category**: Administra las categorías de productos para facilitar la búsqueda y navegación.
-- **ecommerce**: Módulo principal que maneja las vistas relacionadas con la tienda, como el catálogo y las opciones de personalización.
+- **core**: Módulo principal que maneja las vistas relacionadas con la tienda, como el catálogo y las opciones de personalización.
 - **orders**: Gestiona los pedidos realizados por los clientes, incluyendo el estado de la compra y el historial de órdenes.
 - **store**: Maneja la visualización de productos, integración con las categorías y búsqueda.
 
