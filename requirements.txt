@@ -1,0 +1,10 @@
+asgiref==3.8.1
+Django==5.1.2
+django-extensions==3.2.3
+django-session-timeout==0.1.0
+mysqlclient==2.2.4
+pillow==10.4.0
+python-decouple==3.8
+six==1.16.0
+sqlparse==0.5.1
+tzdata==2024.2
