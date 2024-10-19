@@ -37,7 +37,7 @@ class Order(models.Model):
     order_note = models.TextField(blank=True)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     tax = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
-    order_status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='P')
+    order_status = models.CharField(max_length=9, choices=STATUS_CHOICES, default='P')
     ip = models.GenericIPAddressField(blank=True, null=True)
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -88,4 +88,3 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return f'{self.product.product_name} ({self.quantity})'
-
