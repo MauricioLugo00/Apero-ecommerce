@@ -109,90 +109,89 @@ class Accounts(AbstractBaseUser, PermissionsMixin):
     def user_email(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-        
+
+PAISES_LATINOAMERICANOS = [
+    ('AR', 'Argentina'),
+    ('BO', 'Bolivia'),
+    ('BR', 'Brasil'),
+    ('CL', 'Chile'),
+    ('CO', 'Colombia'),
+    ('CR', 'Costa Rica'),
+    ('CU', 'Cuba'),
+    ('DO', 'República Dominicana'),
+    ('EC', 'Ecuador'),
+    ('SV', 'El Salvador'),
+    ('GT', 'Guatemala'),
+    ('HN', 'Honduras'),
+    ('MX', 'México'),
+    ('NI', 'Nicaragua'),
+    ('PA', 'Panamá'),
+    ('PY', 'Paraguay'),
+    ('PE', 'Perú'),
+    ('UY', 'Uruguay'),
+    ('VE', 'Venezuela'),
+]
+    
+DEPARTAMENTOS_LATINOAMERICA = [
+    ('AR_BUE', 'Buenos Aires, Argentina'),
+    ('BO_LPZ', 'La Paz, Bolivia'),
+    ('BR_SPA', 'São Paulo, Brasil'),
+    ('CL_STG', 'Santiago, Chile'),
+    ('CO_ANT', 'Antioquia, Colombia'),
+    ('CO_ATL', 'Atlántico, Colombia'),
+    ('CO_BOL', 'Bolívar, Colombia'),
+    ('CO_BOG', 'Cundinamarca, Colombia'),
+    ('CO_MAG', 'Magdalena, Colombia'),
+    ('CO_VAL', 'Valle del Cauca, Colombia'),
+    ('CR_SJO', 'San José, Costa Rica'),
+    ('CU_HAV', 'La Habana, Cuba'),
+    ('DO_SDO', 'Santo Domingo, República Dominicana'),
+    ('EC_PCH', 'Pichincha, Ecuador'),
+    ('SV_SAL', 'San Salvador, El Salvador'),
+    ('GT_GUA', 'Guatemala, Guatemala'),
+    ('HN_FMZ', 'Francisco Morazán, Honduras'),
+    ('MX_CMX', 'Ciudad de México, México'),
+    ('NI_MNG', 'Managua, Nicaragua'),
+    ('PA_PAC', 'Panamá, Panamá'),
+    ('PY_ASU', 'Asunción, Paraguay'),
+    ('PE_LIM', 'Lima, Perú'),
+    ('UY_MVD', 'Montevideo, Uruguay'),
+    ('VE_CCS', 'Caracas, Venezuela'),
+]
+    
+CIUDADES_LATINOAMERICA = [
+    ('AR_BUE', 'Buenos Aires'),
+    ('BO_LPZ', 'La Paz'),
+    ('BR_SPA', 'São Paulo'),
+    ('CL_STG', 'Santiago'),
+    ('CO_ANT', 'Medellín'),
+    ('CO_ATL', 'Barranquilla'),
+    ('CO_BOL', 'Cartagena de Indias'),
+    ('CO_BOG', 'Bogotá'),
+    ('CO_MAG', 'Santa Marta'),
+    ('CO_VAL', 'Cali'),
+    ('CR_SJO', 'San José'),
+    ('CU_HAV', 'La Habana'),
+    ('DO_SDO', 'Santo Domingo'),
+    ('EC_PCH', 'Quito'),
+    ('SV_SAL', 'San Salvador'),
+    ('GT_GUA', 'Guatemala'),
+    ('HN_FMZ', 'Tegucigalpa'),
+    ('MX_CMX', 'Ciudad de México'),
+    ('NI_MNG', 'Managua'),
+    ('PA_PAC', 'Ciudad de Panamá'),
+    ('PY_ASU', 'Asunción'),
+    ('PE_LIM', 'Lima'),
+    ('UY_MVD', 'Montevideo'),
+    ('VE_CCS', 'Caracas'),
+]
+
 # Clase para crear un perfil de usuario                
 class UserProfile(models.Model):
     user = models.OneToOneField(Accounts, on_delete=models.CASCADE)             # Un perfil por cada cuenta de usuario
     address_line_1 = models.CharField(max_length=100, blank=True)
     address_line_2 = models.CharField(max_length=100, blank=True)
     profile_picture = models.ImageField(blank=True, upload_to='userprofile')
-    
-    PAISES_LATINOAMERICANOS = [
-        ('AR', 'Argentina'),
-        ('BO', 'Bolivia'),
-        ('BR', 'Brasil'),
-        ('CL', 'Chile'),
-        ('CO', 'Colombia'),
-        ('CR', 'Costa Rica'),
-        ('CU', 'Cuba'),
-        ('DO', 'República Dominicana'),
-        ('EC', 'Ecuador'),
-        ('SV', 'El Salvador'),
-        ('GT', 'Guatemala'),
-        ('HN', 'Honduras'),
-        ('MX', 'México'),
-        ('NI', 'Nicaragua'),
-        ('PA', 'Panamá'),
-        ('PY', 'Paraguay'),
-        ('PE', 'Perú'),
-        ('UY', 'Uruguay'),
-        ('VE', 'Venezuela'),
-    ]
-    
-    DEPARTAMENTOS_LATINOAMERICA = [
-        ('AR_BUE', 'Buenos Aires, Argentina'),
-        ('BO_LPZ', 'La Paz, Bolivia'),
-        ('BR_SPA', 'São Paulo, Brasil'),
-        ('CL_STG', 'Santiago, Chile'),
-        ('CO_ANT', 'Antioquia, Colombia'),
-        ('CO_ATL', 'Atlántico, Colombia'),
-        ('CO_BOL', 'Bolívar, Colombia'),
-        ('CO_BOG', 'Cundinamarca, Colombia'),
-        ('CO_MAG', 'Magdalena, Colombia'),
-        ('CO_VAL', 'Valle del Cauca, Colombia'),
-        ('CR_SJO', 'San José, Costa Rica'),
-        ('CU_HAV', 'La Habana, Cuba'),
-        ('DO_SDO', 'Santo Domingo, República Dominicana'),
-        ('EC_PCH', 'Pichincha, Ecuador'),
-        ('SV_SAL', 'San Salvador, El Salvador'),
-        ('GT_GUA', 'Guatemala, Guatemala'),
-        ('HN_FMZ', 'Francisco Morazán, Honduras'),
-        ('MX_CMX', 'Ciudad de México, México'),
-        ('NI_MNG', 'Managua, Nicaragua'),
-        ('PA_PAC', 'Panamá, Panamá'),
-        ('PY_ASU', 'Asunción, Paraguay'),
-        ('PE_LIM', 'Lima, Perú'),
-        ('UY_MVD', 'Montevideo, Uruguay'),
-        ('VE_CCS', 'Caracas, Venezuela'),
-    ]
-    
-    CIUDADES_LATINOAMERICA = [
-        ('AR_BUE', 'Buenos Aires'),
-        ('BO_LPZ', 'La Paz'),
-        ('BR_SPA', 'São Paulo'),
-        ('CL_STG', 'Santiago'),
-        ('CO_ANT', 'Medellín'),
-        ('CO_ATL', 'Barranquilla'),
-        ('CO_BOL', 'Cartagena de Indias'),
-        ('CO_BOG', 'Bogotá'),
-        ('CO_MAG', 'Santa Marta'),
-        ('CO_VAL', 'Cali'),
-        ('CR_SJO', 'San José'),
-        ('CU_HAV', 'La Habana'),
-        ('DO_SDO', 'Santo Domingo'),
-        ('EC_PCH', 'Quito'),
-        ('SV_SAL', 'San Salvador'),
-        ('GT_GUA', 'Guatemala'),
-        ('HN_FMZ', 'Tegucigalpa'),
-        ('MX_CMX', 'Ciudad de México'),
-        ('NI_MNG', 'Managua'),
-        ('PA_PAC', 'Ciudad de Panamá'),
-        ('PY_ASU', 'Asunción'),
-        ('PE_LIM', 'Lima'),
-        ('UY_MVD', 'Montevideo'),
-        ('VE_CCS', 'Caracas'),
-    ]
-    
     country = models.CharField(max_length=2, choices=PAISES_LATINOAMERICANOS, default='CO')
     state = models.CharField(max_length=20, choices=DEPARTAMENTOS_LATINOAMERICA, blank=False)
     city = models.CharField(max_length=50, choices=CIUDADES_LATINOAMERICA, blank=False)
@@ -203,4 +202,4 @@ class UserProfile(models.Model):
     def full_address(self):
         return f'{self.address_line_1} {self.address_line_2}'
 
-    
+
