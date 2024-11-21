@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <div>
-        <p>100%  Naturales y de la mejor calidad</p>
-        <h1>Refresca tu vida, un sorbo a la vez</h1>
-        <p>Encontrarás una amplia selección de opciones refrescantes y deliciosas, diseñadas para cada momento de tu día. Desde bebidas energéticas que te ayudarán a enfrentar tus retos diarios, hasta refrescos naturales llenos de sabor para relajarte y disfrutar, tenemos algo para todos los gustos.</p>
-        <div>
-            <a href="#"><button>Comprar</button></div><a>
-            <a href="#"><button>Mi carrito</button></div><a>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <main>
+        <div class="main_content">
+            <div class="left_main_content">
+                <p>100%  Naturales y de la mejor calidad</p>
+                <h1>REFRESCA TU VIDA, UN SORBO A LA VEZ</h1>
+                <p>Encontrarás una amplia selección de opciones refrescantes y deliciosas, diseñadas para cada momento de tu día. Desde bebidas energéticas que te ayudarán a enfrentar tus retos diarios, hasta refrescos naturales llenos de sabor para relajarte y disfrutar, tenemos algo para todos los gustos.</p>
+                <div>
+                    <a href="#"><button class="buy">Comprar</button></a>
+                    <a href="#"><button class="cart">Mi carrito</button></a>
+                </div>          
+            </div>
+            <img class="main_fresa" src="./static/images/vasoFresa.svg" alt="vaso de fresa">
         </div>
-    </div>
-    <img class="cart" src="./static/images/vasoFresa.svg" alt="vaso de fresa">
+    </main>
     
 {% endblock %}

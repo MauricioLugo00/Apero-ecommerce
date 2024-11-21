@@ -5,3 +5,126 @@
     margin: 0;
     padding: 0;
 }
+
+main {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-top: 128px;
+    background-color: #FFAAE5;
+}
+
+.main_content {
+    font-family: Poppins, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFAAE5;
+    padding: 30px 10%;
+
+    .left_main_content {
+        padding-right: 40%;
+
+        p:nth-child(1) {
+            color: #FFFFFF;
+            font-weight: 400;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+    
+        h1 {
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 46px;
+            line-height: 100%;
+        }
+    
+        p:nth-child(3) {
+            padding: 25px 0 64px 0;
+            color: #55003B;
+            font-weight: 500;
+        }
+    
+        button {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 9px 25px;
+            cursor: pointer;
+            border-radius: 4px;
+            border-style: none;
+            transition: 0.3s ease 0s;
+        }
+    
+        .buy {
+            background-color: #FFFFFF;
+            color: #FF80D9;
+            
+            &:hover {
+                background-color: #FFAAE5;
+                color: #FFFFFF;
+            }
+        }
+    
+        .cart {
+            background-color: #FFAAE5;
+            color: #FFFFFF;
+    
+            &:hover {
+                background-color: #FFFFFF;
+                color: #FF80D9;
+            }
+        }
+    }
+
+    .main_fresa {
+        animation: strawberry 10s infinite;
+    }
+}
+
+@keyframes strawberry {
+
+    0% {
+        transform: translateX(200%);
+    }
+
+    15% {
+        transform: translateX(100%) rotate(-40deg);
+    }
+
+    25% {
+        transform: rotate(0);
+    }
+
+    35% {
+        transform: rotate(360deg);
+    }
+
+    50% {
+        transform: rotate(0);
+    }
+
+    59% {
+        transform: translateY(0);
+    }
+
+    60% {
+        transform: translateY(-10%);
+    }
+
+    61% {
+        transform: translateY(0);
+    }
+
+    62% {
+        transform: translateY(-10%);
+    }
+
+    63% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateX(300%) rotate(40deg);
+    }
+  }
