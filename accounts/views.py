@@ -5,7 +5,7 @@ from .forms import UserForm, UserProfileForm, CustomSignupForm
 from .models import UserProfile
 from orders.models import Order
 from allauth.account.views import SignupView, LoginView, LogoutView, PasswordResetView
-#from carts.views import _cart_id
+from carts.views import _cart_id
 from carts.models import Cart, CartItem
 
 # Vista personalizada de registro utilizando SignupView de django-allauth
@@ -18,6 +18,61 @@ class CustomSignupView(SignupView):
         response = super().form_valid(form)
         # Mensaje de éxito después del registro
         messages.success(self.request, 'Te has registrado exitosamente. Por favor verifica tu correo electrónico.')
+        return response
+    
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        # Llama al método del padre para manejar el inicio de sesión estándar
+        response = super().form_valid(form)
+        
+        # Obtiene el usuario que ha iniciado sesión
+        user = self.user
+        
+        try:
+            # Obtiene el carrito asociado con la sesión actual
+            cart = Cart.objects.get(cart_id=_cart_id(self.request))
+            is_cart_item_exist = CartItem.objects.filter(cart=cart).exists()
+            
+            if is_cart_item_exist:
+                cart_items = CartItem.objects.filter(cart=cart)
+                
+                # Obtiene las variaciones de los ítems en el carrito
+                product_variation = []
+                for item in cart_items:
+                    variation = item.variation.all()
+                    product_variation.append(list(variation))
+                
+                # Verifica los ítems existentes en el carrito del usuario
+                existing_cart_items = CartItem.objects.filter(user=user)
+                ex_var_list = []
+                id_list = []
+                
+                for item in existing_cart_items:
+                    existing_variation = item.variation.all()
+                    ex_var_list.append(list(existing_variation))
+                    id_list.append(item.id)
+                
+                # Actualiza o crea ítems en el carrito
+                for pr in product_variation:
+                    if pr in ex_var_list:
+                        # Si la variación existe, aumenta la cantidad
+                        index = ex_var_list.index(pr)
+                        item_id = id_list[index]
+                        item = CartItem.objects.get(id=item_id)
+                        item.quantity += 1
+                        item.user = user
+                        item.save()
+                    else:
+                        # Asigna los ítems del carrito al usuario
+                        cart_items = CartItem.objects.filter(cart=cart)
+                        for item in cart_items:
+                            item.user = user
+                            item.save()
+        
+        except Cart.DoesNotExist:
+            pass
+        
+        messages.success(self.request, 'Has iniciado sesión exitosamente')
         return response
 
 # Vista del panel de usuario, requiere que el usuario esté autenticado
