@@ -7,7 +7,7 @@ from .models import Product, ReviewRating, ProductGallery
 from categories.models import Category
 from carts.models import CartItem
 from carts.views import _cart_id
-#from orders.models import OrderProduct
+from orders.models import OrderProduct
 from .forms import ReviewForm
 
 def store(request, category_slug=None):

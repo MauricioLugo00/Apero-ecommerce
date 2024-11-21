@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
 ]
 
@@ -112,17 +111,12 @@ ACCOUNT_LOGOUT_ON_GET = True  # Cierra sesión al acceder a la URL de logout
 
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
-    },
     'github': {
-        'SCOPE': ['user', 'repo', 'read:org'],
         'APP': {
-            'client_id': 'TU_CLIENT_ID',
-            'secret': 'TU_CLIENT_SECRET',
-        },
-    },
+            'client_id': os.getenv('GITHUB_CLIENT_ID'),
+            'secret': os.getenv('GITHUB_CLIENT_SECRET')
+        }
+    }
 }
 
 # Configuración de correo electrónico
