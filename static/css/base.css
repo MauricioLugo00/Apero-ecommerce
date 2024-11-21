@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFAAE5;
+    padding: 30px 10%;
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    li, a, button {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    .logo, .cart {
+        cursor: pointer;
+    }
+
+    .nav_links {
+        list-style: none;
+
+        & li {
+            display: inline-block;
+            padding: 0 20px;
+            cursor: pointer;
+
+            a {
+                transition: 0.3s ease 0s;
+            }
+
+            a:hover {
+                color: #55003B;
+            }
+        }
+    }
+
+    button {
+        padding: 9px 25px;
+        cursor: pointer;
+        border-radius: 4px;
+        border-color: #FFFFFF;
+        border-style: none;
+        background-color: #FFAAE5;
+        transition: 0.3s ease 0s;
+
+        &:hover {
+            background-color: #FFFFFF;
+            color: #FFAAE5;
+        }
+    }
+}
+
+footer {
+    font-family: Poppins, sans-serif;
+    display: grid;
+    grid-template-areas:
+    "left right"
+    "bot bot";
+    align-items: center;
+    background-color: #FF55CC;
+    color: #FFFFFF;
+    padding: 30px 10%;
+
+    .left_footer {
+        grid-area: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 40%;
+        gap: 32px;
+    }
+
+    .right_footer {
+        grid-area: right;
+        display: flex;
+        gap: 124px;
+        justify-content: flex-end;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        & div ul {
+            list-style: none;
+
+            li {
+                padding-top: 25px;
+            }
+
+            a {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .bot_footer {
+        grid-area: bot;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 32px;
+        border-top: solid rgba(255, 255, 255, 0.3);
+        border-width: 1px;
+
+        p {
+            margin-top: 32px;
+        }
+
+        div {
+            display: flex;
+            gap: 25px;
+        }
+    }
+}

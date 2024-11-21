@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/css/base.css">
+    <title>base</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}"><img class="logo" src="./static/images/Logo.svg" alt="Logo de Apero"></a>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Contactos</a></li>
+            </ul>
+        </nav>
+        <div>
+            <img class="cart" src="./static/images/Carrito.svg" alt="Mi carrito de compras">
+            <a href="#"><button>Registrar</button></a>
+            <a href="#"><button>Entrar</button></a>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <div class="left_footer">
+            <a href="{% url 'home' %}"><img class="logo" src="./static/images/Logo.svg" alt="Logo de Apero"></a>
+            <p>¡Puedes visitar todas nuestras redes sociales para contactarnos!</p>
+            <div>
+                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Instagram.svg" alt="Logo de Apero"></a>
+                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Twitter.svg" alt="Logo de Apero"></a>
+                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Facebook.svg" alt="Logo de Apero"></a>
+            </div>
+        </div>
+        <div class="right_footer">
+            <div>
+                <h3>Acerca de</h3>
+                <ul>
+                    <li><a href="#">¿Quiénes somos?</a></li>
+                    <li><a href="#">Fundadores</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Patrocinios</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Comunidad</h3>
+                <ul>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Sugerencias</a></li>
+                    <li><a href="#">Invita un amigo</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Redes</h3>
+                <ul>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">X</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bot_footer">
+            <p>©2024 Apero. Todos los derechos reservados.</p>
+            <div>
+                <p>Política de privacidad</p>
+                <p>Términos y condiciones</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
