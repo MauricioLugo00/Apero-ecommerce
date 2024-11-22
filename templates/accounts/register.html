@@ -7,6 +7,7 @@
     <title>Signup</title>
 </head>
 <body>
+    <a href="{% url 'home' %}" class="exit"><img src="../../static/images/exit.svg" alt="pestaña de inicio"></a>
     <img src="../../static/images/vasoMora.svg" alt="vaso de mora">
     <div class="right_signup">
         <h2>Crear cuenta Apero</h2>
@@ -15,9 +16,9 @@
             {{ form }}
             <input type="submit" value="Crear cuenta">
         </form>
-        <p>¿Ya tienes una cuenta? <a href="#">Entrar</a></p>
+        <p>¿Ya tienes una cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
         <p class="o">- O -</p>
-        <a href=""><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
+        <a href="#"><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
         <p class="apero">Apero</p>
     </div>
 </body>

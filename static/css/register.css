@@ -17,6 +17,12 @@ body {
     background-color: #FFAAE5;
     padding-left: 10%;
 
+    .exit {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+    }
+
     img {
         padding-right: 10%;
     }
