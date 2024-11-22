@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/register.css">
+    <title>Signup</title>
+</head>
+<body>
+    <img src="../../static/images/vasoMora.svg" alt="vaso de mora">
+    <div class="right_signup">
+        <h2>Crear cuenta Apero</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Crear cuenta">
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="#">Entrar</a></p>
+        <p class="o">- O -</p>
+        <a href=""><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
+        <p class="apero">Apero</p>
+    </div>
+</body>
+</html>
