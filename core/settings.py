@@ -131,5 +131,8 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Email del remitente
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Contraseña del email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Correo predeterminado para enviar mensajes
 
+# PayPal Sandbox credentials
+PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID_SANDBOX')
+PAYPAL_CLIENT_SECRET = os.getenv('PAYPAL_CLIENT_SECRET_SANDBOX')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
