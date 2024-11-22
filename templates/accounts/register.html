@@ -18,7 +18,8 @@
         </form>
         <p>¿Ya tienes una cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
         <p class="o">- O -</p>
-        <a href="#"><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
+        {% load socialaccount %}
+        <a href="{% provider_login_url 'github' %}"><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
         <p class="apero">Apero</p>
     </div>
 </body>

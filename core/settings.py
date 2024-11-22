@@ -25,14 +25,14 @@ INSTALLED_APPS = [
     'orders',
     'store',
 
-    #django-allauth
+    # django-allauth
     'django.contrib.sites',  # Requerido por allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
 
-    #Otras
+    # Otras
     'django_extensions',
 ]
 
@@ -103,13 +103,14 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Backend predeterminado de Django
     'allauth.account.auth_backends.AuthenticationBackend',  # Backend de allauth
 ]
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_URL = 'account_login'  # Vista predeterminada de inicio de sesión de allauth
 LOGIN_REDIRECT_URL = 'home'  # URL de redirección después de iniciar sesión
-LOGOUT_REDIRECT_URL = 'account_login'  # URL de redirección después de cerrar sesión
+# URL de redirección después de cerrar sesión
+LOGOUT_REDIRECT_URL = 'account_login'
 ACCOUNT_LOGOUT_ON_GET = True  # Cierra sesión al acceder a la URL de logout
 
 
@@ -129,7 +130,8 @@ EMAIL_PORT = os.getenv('EMAIL_PORT', 587)  # Puerto SMTP
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'  # Seguridad
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Email del remitente
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Contraseña del email
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Correo predeterminado para enviar mensajes
+# Correo predeterminado para enviar mensajes
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
