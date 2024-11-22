@@ -21,13 +21,14 @@ class CustomSignupView(SignupView):
         return response
     
 class CustomLoginView(LoginView):
-    template_name = 'accounts/login.html'  # Plantilla a utilizar para la vista de registro
+    template_name = 'accounts/login.html'
+    
     def form_valid(self, form):
-        # Llama al método del padre para manejar el inicio de sesión estándar
+        # Primero ejecutamos el form_valid del padre para completar el login
         response = super().form_valid(form)
         
-        # Obtiene el usuario que ha iniciado sesión
-        user = self.user
+        # En allauth, el usuario ya está autenticado después de super().form_valid()
+        user = form.user  # <- Esta es la forma correcta de obtener el usuario en allauth
         
         try:
             # Obtiene el carrito asociado con la sesión actual

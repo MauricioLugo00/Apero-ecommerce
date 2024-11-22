@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from store.models import Product, Variation
 from .models import Cart, CartItem
 from django.db import transaction
+from django.contrib import messages
 
 # Función para obtener el ID del carrito desde la sesión
 def _cart_id(request):

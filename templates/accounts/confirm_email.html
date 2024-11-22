@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmar dirección de correo electrónico</h1>
+        
+        {% if confirmation %}
+            <p>Por favor, confirma que <strong>{{ confirmation.email_address.email }}</strong> es tu dirección de correo electrónico haciendo clic en el botón de abajo.</p>
+            
+            <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Confirmar correo electrónico</button>
+            </form>
+        {% else %}
+            <p>El enlace de confirmación de correo electrónico ha expirado o no es válido. 
+               Por favor, solicita un nuevo enlace de confirmación.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
