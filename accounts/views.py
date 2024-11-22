@@ -21,6 +21,7 @@ class CustomSignupView(SignupView):
         return response
     
 class CustomLoginView(LoginView):
+    template_name = 'accounts/login.html'  # Plantilla a utilizar para la vista de registro
     def form_valid(self, form):
         # Llama al método del padre para manejar el inicio de sesión estándar
         response = super().form_valid(form)

@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+
+    #Otras
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
