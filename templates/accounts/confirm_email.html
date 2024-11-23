@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/confirm_email.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/confirm_email.css' %}"> 
     <title>Document</title>
 </head>
 <body>
@@ -26,3 +27,16 @@
     </div>
 </body>
 </html>
+
+
+<!--
+
+Antes tenias en el link css esto:
+
+    <link rel="stylesheet" href="../../static/css/confirm_email.css">
+
+No use el href normal de html, usa el de jinja que es:
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/confirm_email.css' %}"> 
+
+-->
