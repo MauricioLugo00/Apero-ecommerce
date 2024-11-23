@@ -137,6 +137,8 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
+# Fotos de perfil
+/static/images/user_profile
 
 # Cosas apartes
 estructura_arbol.txt

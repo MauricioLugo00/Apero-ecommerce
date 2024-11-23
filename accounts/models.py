@@ -103,7 +103,7 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=50, blank=True)
     country = models.CharField(max_length=50, blank=True)
-    profile_picture = models.ImageField(upload_to='userprofile/', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='static/images/user_profile/', blank=True, null=True)
 
     # Cadena de texto que representa al objeto
     def __str__(self):

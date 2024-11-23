@@ -41,9 +41,9 @@
                             <div class="profile-summary">
                                 <div class="summary-card">
                                     {% if userprofile.profile_picture %}
-                                        <img src="{{ userprofile.profile_picture.url }}" alt="imagen de perfil">
+                                        <img src="{{ userprofile.profile_picture.url }}" alt="Imagen de Perfil" width="100" style="border-radius:50px;">
                                     {% else %}
-                                        <img src="{% static 'images/default_profile_picture.svg' %}" alt="imagen de perfil">
+                                        <img src="{% static 'images/default_profile_picture.svg' %}" alt="Imagen de Perfil" width="100" style="border-radius:50px;">
                                     {% endif %}
                                     <div class="profile-info">
                                         <p>{{ user.email }}</p>
