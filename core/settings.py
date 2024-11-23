@@ -125,8 +125,12 @@ SOCIALACCOUNT_PROVIDERS = {
             'user',
             'email',
         ],
+        'AUTH_PARAMS': {
+            'redirect_uri': 'http://localhost:8000/accounts/github/login/callback/'  # Asegúrate de que esto coincida con la configuración en GitHub
+        }
     }
 }
+
 
 # Configuración de correo electrónico
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

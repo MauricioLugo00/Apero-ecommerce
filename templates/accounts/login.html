@@ -14,7 +14,20 @@
         <h2>Ingresar a Apero</h2>
         <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <input type="submit" value="Entrar">
         </form>
         <p>¿Aún no tienes cuenta? <a href="{% url 'account_signup' %}">Registrarme</a></p>
