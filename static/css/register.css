@@ -7,8 +7,8 @@
 }
 
 body {
-    overflow-y: hidden;
     overflow-x: hidden;
+    overflow-y: hidden;
     font-family: Poppins, sans-serif;
     height: 100vh;
     display: flex;
@@ -16,114 +16,159 @@ body {
     align-items: center;
     background-color: #FFAAE5;
     padding-left: 10%;
+}
 
-    .exit {
-        position: absolute;
-        top: 5%;
-        right: 5%;
+.exit {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+.vaso_mora {
+    padding-right: 10%;
+    animation: blackberry 10s;
+}
+
+@keyframes blackberry {
+    0% {
+        transform: translateX(300%);
     }
 
-    img {
-        padding-right: 10%;
+    15% {
+        transform: translateX(0) rotate(-40deg);
     }
 
-    .right_signup {
-        border-radius: 25px 0 0 25px;
-        background-color: #FFFFFF;
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        h2 {
-            padding-bottom: 32px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-
-            div:nth-child(n) {
-                color: #7C838A;
-                display: flex;
-                flex-direction: column;
-                padding-bottom: 10px;
-
-                input {
-                    background-color: #FDDCF5;
-                    padding: 14px 30px;
-                    font-family: Poppins, sans-serif;
-                    font-size: 16px;
-                    border: none;
-                    border-radius: 15px;
-                }
-            }
-
-            div:nth-child(6) {
-                .helptext {
-                    display: none;
-                }
-            }
-
-            input:nth-child(8) {
-                align-self: center;
-                width: 50%;
-                margin-top: 32px;
-                font-family: "Poppins", sans-serif;
-                font-weight: 600;
-                font-size: 16px;
-                text-decoration: none;
-                padding: 9px 25px;
-                cursor: pointer;
-                border-radius: 4px;
-                border-style: none;
-                background-color: #FFAAE5;
-                color: #FFFFFF;
-            }
-        }
-
-        p {
-            color: #7C838A;
-
-            a {
-                text-decoration: none;
-                color: #FFAAE5;
-            }
-        }
-
-        .o {
-            margin: 12px 0;
-        }
-
-        a:nth-child(5) {      
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-wrap: nowrap;
-            width: 20%;
-            margin-top: 32px;
-            font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            text-decoration: none;
-            padding: 5px 105px;
-            cursor: pointer;
-            border-radius: 15px;
-            border-style: none;
-            border: solid 1px #7C838A;
-            color: #7C838A;
-
-            img {
-                padding-right: 20px;
-            }
-        }
-
-        .apero {
-            position: absolute;
-            top: 97%;
-        }
+    25% {
+        transform: translateX(0);
     }
+
+    35% {
+        transform: translateX(-10%);
+    }
+
+    50% {
+        transform: translateX(10%);
+    }
+
+    59% {
+        transform: translateY(0);
+    }
+
+    60% {
+        transform: translateY(-10%);
+    }
+
+    61% {
+        transform: translateY(0);
+    }
+
+    62% {
+        transform: translateY(-10%);
+    }
+
+    63% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.right_signup {
+    border-radius: 25px 0 0 25px;
+    background-color: #FFFFFF;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right_signup h2 {
+    padding-bottom: 32px;
+}
+
+.right_signup form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.right_signup form div:nth-child(n) {
+    color: #7C838A;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.right_signup form div:nth-child(n) input {
+    background-color: #FDDCF5;
+    padding: 14px 30px;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+}
+
+.right_signup form div:nth-child(6) .helptext {
+    display: none;
+}
+
+.right_signup form input:nth-child(8) {
+    align-self: center;
+    width: 50%;
+    margin-top: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 9px 25px;
+    cursor: pointer;
+    border-radius: 4px;
+    border-style: none;
+    background-color: #FFAAE5;
+    color: #FFFFFF;
+}
+
+.right_signup p {
+    color: #7C838A;
+}
+
+.right_signup p a {
+    text-decoration: none;
+    color: #FFAAE5;
+}
+
+.right_signup .o {
+    margin: 12px 0;
+}
+
+.right_signup a:nth-child(5) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-wrap: nowrap;
+    width: 20%;
+    margin-top: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 5px 105px;
+    cursor: pointer;
+    border-radius: 15px;
+    border-style: none;
+    border: solid 1px #7C838A;
+    color: #7C838A;
+}
+
+.right_signup a:nth-child(5) img {
+    padding-right: 20px;
+}
+
+.right_signup .apero {
+    position: absolute;
+    top: 97%;
 }
