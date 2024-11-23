@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/register.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <title>Signup</title>
 </head>
 <body>
-    <a href="{% url 'home' %}" class="exit"><img src="../../static/images/exit.svg" alt="pestaña de inicio"></a>
-    <img class="vaso_mora" src="../../static/images/vasoMora.svg" alt="vaso de mora">
+    <a href="{% url 'home' %}" class="exit"><img src="{% static 'images/exit.svg' %}" alt="pestaña de inicio"></a>
+    <img class="vaso_mora" src="{% static 'images/vasoMora.svg' %}" alt="vaso de mora">
     <div class="right_signup">
         <h2>Crear cuenta Apero</h2>
         <form action="" method="post">
@@ -19,7 +20,7 @@
         <p>¿Ya tienes una cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
         <p class="o">- O -</p>
         {% load socialaccount %}
-        <a href="{% provider_login_url 'github' %}"><img src="../../static/images/GitHub.svg">Crear con GitHub</a>
+        <a href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Crear con GitHub"></a>
         <p class="apero">Apero</p>
     </div>
 </body>

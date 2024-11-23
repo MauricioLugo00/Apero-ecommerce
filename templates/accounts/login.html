@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/login.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Login</title>
 </head>
 <body>
-    <a href="{% url 'home' %}" class="exit"><img src="../../static/images/exit.svg" alt="pestaña de inicio"></a>
-    <img class="vaso_zanahoria" src="../../static/images/vasoZanahoria.svg" alt="vaso de zanahoria">
+    <a href="{% url 'home' %}" class="exit"><img src="{% static 'images/exit.svg' %}" alt="pestaña de inicio"></a>
+    <img class="vaso_zanahoria" src="{% static 'images/vasoZanahoria.svg' %}" alt="vaso de zanahoria">
     <div class="right_login">
         <h2>Ingresar a Apero</h2>
         <form action="" method="post">

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./static/css/base.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>base</title>
 </head>
 <body>
     <header>
-        <a href="{% url 'home' %}"><img class="logo" src="./static/images/Logo.svg" alt="Logo de Apero"></a>
+        <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/Logo.svg' %}" alt="Logo de Apero"></a>
         <nav>
             <ul class="nav_links">
                 <li><a href="{% url 'home' %}">Inicio</a></li>
@@ -17,7 +18,7 @@
             </ul>
         </nav>
         <div>
-            <img class="cart" src="./static/images/Carrito.svg" alt="Mi carrito de compras">
+            <img class="cart" src="{% static 'images/Carrito.svg' %}" alt="Mi carrito de compras">
             <a href="{% url 'account_signup' %}"><button>Registrar</button></a>
             <a href="{% url 'account_login' %}"><button>Entrar</button></a>
         </div>
@@ -26,12 +27,12 @@
     {% endblock %}
     <footer>
         <div class="left_footer">
-            <a href="{% url 'home' %}"><img class="logo" src="./static/images/Logo.svg" alt="Logo de Apero"></a>
+            <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/Logo.svg' %}" alt="Logo de Apero"></a>
             <p>¡Puedes visitar todas nuestras redes sociales para contactarnos!</p>
             <div>
-                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Instagram.svg" alt="instragram"></a>
-                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Twitter.svg" alt="twitter"></a>
-                <a href="{% url 'home' %}"><img class="logo" src="./static/images/Facebook.svg" alt="facebook"></a>
+                <a href="#"><img class="logo" src="{% static 'images/Instagram.svg' %}" alt="instragram"></a>
+                <a href="#"><img class="logo" src="{% static 'images/Twitter.svg' %}" alt="twitter"></a>
+                <a href="#"><img class="logo" src="{% static 'images/Facebook.svg' %}" alt="facebook"></a>
             </div>
         </div>
         <div class="right_footer">

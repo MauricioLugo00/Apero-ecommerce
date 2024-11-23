@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/css/verification_sent.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/verification_sent.css' %}"> 
     <title>Verificación</title>
 </head>
 <body> 
-    <a href="{% url 'home' %}" class="exit"><img src="../../static/images/exit.svg" alt="pestaña de inicio"></a>
-    <img class="vaso_smirnoff" src="../../static/images/vasoSmirnoff.svg" alt="vaso de zanahoria">
+    <a href="{% url 'home' %}" class="exit"><img src="{% static 'images/exit.svg' %}" alt="pestaña de inicio"></a>
+    <img class="vaso_smirnoff" src="{% static 'images/vasoSmirnoff.svg' %}" alt="vaso de zanahoria">
     <div class="container">
         <h2>Verificación de correo electrónico</h2>
         <p>Se ha enviado un correo de verificación a tu dirección de email. 

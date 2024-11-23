@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
-    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <main>
         <div class="main_content">
             <div class="left_main_content">
-                <p>100%  Naturales y de la mejor calidad</p>
+                <p>100% Naturales y de la mejor calidad</p>
                 <h1>REFRESCA TU VIDA, UN SORBO A LA VEZ</h1>
                 <p>Encontrarás una amplia selección de opciones refrescantes y deliciosas, diseñadas para cada momento de tu día. Desde bebidas energéticas que te ayudarán a enfrentar tus retos diarios, hasta refrescos naturales llenos de sabor para relajarte y disfrutar, tenemos algo para todos los gustos.</p>
                 <div>
@@ -13,72 +15,73 @@
                     <a href="#"><button class="cart">Mi carrito</button></a>
                 </div>          
             </div>
-            <img class="main_fresa" src="./static/images/vasoFresa.svg" alt="vaso de fresa">
+            <img class="main_fresa" src="{% static 'images/vasoFresa.svg' %}" alt="vaso de fresa">
         </div>
         <div class="sedes">
             <div class="bocagrande">
-                    <div class="location">
-                        <img src="./static/images/markWhiteBG.svg">
-                        <p>Sede bocagrande</p>
-                    </div>
-                    <div class="information">
-                        <div class="b_place">
-                            <p class="b_tittle">Ubicacíon</p>
-                            <div>
-                                <a href="https://maps.app.goo.gl/znZCq28MVRTxHs3H7"><p>Ver en Google Maps</p></a>
-                                <a href="https://maps.app.goo.gl/znZCq28MVRTxHs3H7"><img src="./static/images/downPink.svg"></a>
-                            </div>
-                        </div>
-                        <div class="b_schedule">
-                            <p class="b_tittle">Horarios</p>
-                            <div>
-                                <p>Ver horarios</p>
-                                <img src="./static/images/downPink.svg">
-                            </div>
-                        </div>
-                        <div class="b_cel">
-                            <p class="b_tittle">Cel</p>
-                            <div>
-                                <p>3016601713</p>
-                            </div>
+                <div class="location">
+                    <img src="{% static 'images/markWhiteBG.svg' %}">
+                    <p>Sede bocagrande</p>
+                </div>
+                <div class="information">
+                    <div class="b_place">
+                        <p class="b_tittle">Ubicacíon</p>
+                        <div>
+                            <a href="https://maps.app.goo.gl/znZCq28MVRTxHs3H7"><p>Ver en Google Maps</p></a>
+                            <a href="https://maps.app.goo.gl/znZCq28MVRTxHs3H7"><img src="{% static 'images/downPink.svg' %}"></a>
                         </div>
                     </div>
+                    <div class="b_schedule">
+                        <p class="b_tittle">Horarios</p>
+                        <div>
+                            <p>Ver horarios</p>
+                            <img src="{% static 'images/downPink.svg' %}">
+                        </div>
+                    </div>
+                    <div class="b_cel">
+                        <p class="b_tittle">Cel</p>
+                        <div>
+                            <p>3016601713</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="centro">
-                    <div class="location">
-                        <img src="./static/images/markPinkBG.svg">
-                        <p>Sede centro</p>
-                    </div>
-                    <div class="information">
-                        <div class="c_place">
-                            <p class="c_tittle">Ubicacíon</p>
-                            <div>
-                                <a href="https://maps.app.goo.gl/uTc9ERkH5tV7GEda8"><p>Ver en Google Maps</p></a>
-                                <a href="https://maps.app.goo.gl/uTc9ERkH5tV7GEda8"><img src="./static/images/downWhite.svg"></a>
-                            </div>
-                        </div>
-                        <div class="c_schedule">
-                            <p class="c_tittle">Horarios</p>
-                            <div>
-                                <p>Ver horarios</p>
-                                <img src="./static/images/downWhite.svg">
-                            </div>
-                        </div>
-                        <div class="c_cel">
-                            <p class="c_tittle">Cel</p>
-                            <div>
-                                <p>3016601713</p>
-                            </div>
+                <div class="location">
+                    <img src="{% static 'images/markPinkBG.svg' %}">
+                    <p>Sede centro</p>
+                </div>
+                <div class="information">
+                    <div class="c_place">
+                        <p class="c_tittle">Ubicacíon</p>
+                        <div>
+                            <a href="https://maps.app.goo.gl/uTc9ERkH5tV7GEda8"><p>Ver en Google Maps</p></a>
+                            <a href="https://maps.app.goo.gl/uTc9ERkH5tV7GEda8"><img src="{% static 'images/downWhite.svg' %}"></a>
                         </div>
                     </div>
+                    <div class="c_schedule">
+                        <p class="c_tittle">Horarios</p>
+                        <div>
+                            <p>Ver horarios</p>
+                            <img src="{% static 'images/downWhite.svg' %}">
+                        </div>
+                    </div>
+                    <div class="c_cel">
+                        <p class="c_tittle">Cel</p>
+                        <div>
+                            <p>3016601713</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="booking">
             <div class="booking_tittle">
                 <h2>Reserva tu mesa</h2>
                 <p>¡Reserva tu lugar para evitar filas y disfrutar al instante!</p>
             </div>
-            <img src="./static/images/reservaIlustration.svg" alt="ilustracion de las reservas">
+            <img src="{% static 'images/reservaIlustration.svg' %}" alt="ilustracion de las reservas">
             <div class="booking_info">
                 <div>
                     <h3>Elige tu sede favorita</h3>
@@ -100,24 +103,24 @@
                 <p>¡Desde las mejores presentaciones en vasitos personalizados, como los mejores sabores de toda la ciudad, tenemos los mejores precios de bebidas!</p>
             </div>
             <div class="us_main">
-                <img class="almendra" src="./static/images/vasoAlmendra.svg" alt="vaso de almendra ilustracion">
+                <img class="almendra" src="{% static 'images/vasoAlmendra.svg' %}" alt="vaso de almendra ilustracion">
                 <div class="us_info">
                     <div class="us_info_container">
-                        <img src="./static/images/celIcon.svg" alt="icono de celular">
+                        <img src="{% static 'images/celIcon.svg' %}" alt="icono de celular">
                         <div>
                             <h4>Atención al cliente</h4>
                             <p>Respondemos y tomamos pedidos enseguida, siempre esperaremos tu llamada.</p>
                         </div>
                     </div>
                     <div class="us_info_container">
-                        <img src="./static/images/priceIcon.svg" alt="icono de celular">
+                        <img src="{% static 'images/priceIcon.svg' %}" alt="icono de celular">
                         <div>
                             <h4>Mejor precio garantizado</h4>
                             <p>Precios más baratos en el mercado y con mayor calidad.</p>
                         </div>
                     </div>
                     <div class="us_info_container">
-                        <img src="./static/images/locationIcon.svg" alt="icono de celular">
+                        <img src="{% static 'images/locationIcon.svg' %}" alt="icono de ubicación">
                         <div>
                             <h4>Domicilios a toda la ciudad</h4>
                             <p>¡No te preocupes si estás en la otra punta de la ciudad, hay envíos a toda Cartagena!</p>
@@ -135,9 +138,9 @@
                 <div class="card_item card_item_1">
                     <div class="card_header">
                         <div class="card_user">
-                            <img src="./static/images/redFace.svg">
+                            <img src="{% static 'images/redFace.svg' %}">
                             <div class="card_name">
-                                <h3>Juan Pablo</h6>
+                                <h3>Juan Pablo</h3>
                                 <p>Cartagena, Col</p>
                             </div>
                         </div>
@@ -150,9 +153,9 @@
                 <div class="card_item card_item_2">
                     <div class="card_header">
                         <div class="card_user">
-                            <img src="./static/images/blueFace.svg">
+                            <img src="{% static 'images/blueFace.svg' %}">
                             <div class="card_name">
-                                <h3>Juan Jose</h6>
+                                <h3>Juan Jose</h3>
                                 <p>Cartagena, Col</p>
                             </div>
                         </div>
@@ -165,9 +168,9 @@
                 <div class="card_item card_item_3">
                     <div class="card_header">
                         <div class="card_user">
-                            <img src="./static/images/pinkFace.svg">
+                            <img src="{% static 'images/pinkFace.svg' %}">
                             <div class="card_name">
-                                <h3>Maria Camila</h6>
+                                <h3>Maria Camila</h3>
                                 <p>Cartagena, Col</p>
                             </div>
                         </div>
@@ -180,7 +183,7 @@
                 <div class="card_item card_item_4">
                     <div class="card_header">
                         <div class="card_user">
-                            <img src="./static/images/blackFace.svg">
+                            <img src="{% static 'images/blackFace.svg' %}">
                             <div class="card_name">
                                 <h3>Danells Montes</h6>
                                 <p>Cartagena, Col</p>
@@ -195,9 +198,9 @@
                 <div class="card_item card_item_5">
                     <div class="card_header">
                         <div class="card_user">
-                            <img src="./static/images/greenFace.svg">
+                            <img src="{% static 'images/greenFace.svg' %}">
                             <div class="card_name">
-                                <h3>Mauricio Lugo</h6>
+                                <h3>Mauricio Lugo</h3>
                                 <p>La victoria, Ven</p>
                             </div>
                         </div>
@@ -208,7 +211,6 @@
                     <p class="card_opinion">"Perfecto para todos los gustos. Bebidas naturales, cócteles y bebidas calientes muy bien preparadas. ¡Me encantó!"</p>
                 </div>
             </div>
-        </div>
+        </div>        
     </main>
-    
 {% endblock %}
