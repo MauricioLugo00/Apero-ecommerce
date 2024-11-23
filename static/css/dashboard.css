@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.section-conten {
+    background-color: #fafafa;
+    padding: 40px 10%;
+    min-height: calc(100vh - 150px);
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: fit-content;
+}
+
+.sidebar-header h2 {
+    color: #FFAAE5;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-nav a {
+    color: #666;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover, .sidebar-nav a.active {
+    background-color: #FFAAE5;
+    color: #FFFFFF;
+}
+
+.logout-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    color: #FF55CC;
+    text-decoration: none;
+    border: 1px solid #FF55CC;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #FF55CC;
+    color: #FFFFFF;
+}
+
+/* Main Content Styles */
+.dashboard-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #FFAAE5;
+    padding: 20px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.summary-card {
+    background-color: #FFFFFF;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Orders Summary Styles */
+.orders-count {
+    font-size: 3em;
+    font-weight: 700;
+    color: #FF55CC;
+    margin: 15px 0;
+}
+
+.summary-card h5 {
+    color: #55003B;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.summary-card a {
+    color: #FFAAE5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.summary-card a:hover {
+    color: #FF55CC;
+}
+
+/* Profile Summary Styles */
+.profile-summary img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #FFAAE5;
+}
+
+.profile-info p {
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .dashboard-layout {
+        grid-template-columns: 220px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-conten {
+        padding: 20px 5%;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 0;
+    }
+}
+
+
+/* Ya se q esta mrdota esta mal, solo callate OK????????????

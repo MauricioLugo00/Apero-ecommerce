@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<section class="section-conten">
+    <div class="container">
+        <div class="dashboard-layout">
+            <!-- Panel Lateral -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Mi panel</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="active">Mi panel</a>
+                    <a href="{% url 'my_orders' %}">Mis órdenes de compra</a>
+                    <a href="{% url 'edit_profile' %}">Editar perfil</a>
+                    <a href="{% url 'account_change_password' %}">Cambiar contraseña</a>
+                    <a href="#">Ayuda y contacto</a>
+                </nav>
+                <div class="logout-section">
+                    <a href="{% url 'account_logout' %}" class="logout-btn">Cerrar sesión</a>
+                </div>
+            </aside>
+
+            <!-- Contenido Principal -->
+            <main class="main-content">
+                <article class="dashboard-card">
+                    <header class="card-header">
+                        <strong>Bienvenido nuevamente:</strong>
+                        <span>{{ user.first_name }} {{ user.last_name }}</span>
+                    </header>
+                    <div class="card-body">
+                        <div class="dashboard-grid">
+                            <div class="orders-summary">
+                                <div class="summary-card">
+                                    <h5>Total de órdenes realizadas:</h5>
+                                    <div class="orders-count">{{ orders_count }}</div>
+                                    <a href="{% url 'my_orders' %}">Ver mis órdenes</a>
+                                </div>
+                            </div>
+                            <div class="profile-summary">
+                                <div class="summary-card">
+                                    {% if userprofile.profile_picture %}
+                                        <img src="{{ userprofile.profile_picture.url }}" alt="imagen de perfil">
+                                    {% else %}
+                                        <img src="{% static 'images/default_profile_picture.svg' %}" alt="imagen de perfil">
+                                    {% endif %}
+                                    <div class="profile-info">
+                                        <p>{{ user.email }}</p>
+                                        <p>{{ user.phone_number }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}

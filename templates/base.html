@@ -19,10 +19,15 @@
         </nav>
         <div>
             <img class="cart" src="{% static 'images/Carrito.svg' %}" alt="Mi carrito de compras">
-            <a href="{% url 'account_signup' %}"><button>Registrar</button></a>
-            <a href="{% url 'account_login' %}"><button>Entrar</button></a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}"><button>Mi cuenta</button></a>
+                <a href="{% url 'account_logout' %}"><button>Cerrar sesión</button></a>
+            {% else %}
+                <a href="{% url 'account_signup' %}"><button>Registrar</button></a>
+                <a href="{% url 'account_login' %}"><button>Entrar</button></a>
+            {% endif %}
         </div>
-    </header>
+    </header>    
     {% block content %}
     {% endblock %}
     <footer>

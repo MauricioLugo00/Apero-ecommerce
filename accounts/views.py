@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserForm, UserProfileForm, CustomSignupForm
 from .models import UserProfile
 from orders.models import Order
-from allauth.account.views import SignupView, LoginView, LogoutView, PasswordResetView
+from allauth.account.views import SignupView, LoginView
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 
@@ -122,8 +122,3 @@ def edit_profile(request):
     }
     return render(request, 'accounts/edit_profile.html', context)  # Renderizar la plantilla de edición de perfil con el contexto
 
-# Vista para cambiar la contraseña del usuario, requiere que el usuario esté autenticado
-@login_required(login_url='account_login')
-def change_password(request):
-    # Redirigir a la vista de cambio de contraseña de allauth
-    return redirect('account_change_password')

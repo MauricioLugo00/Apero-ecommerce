@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+<section class="section-conten padding-y bg">
+    <div class="container">
+        <div class="row">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Mi panel</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="{% url 'dashboard' %}">Mi panel</a>
+                    <a href="{% url 'my_orders' %}">Mis órdenes de compra</a>
+                    <a href="#" class="active">Editar perfil</a>
+                    <a href="{% url 'account_change_password' %}">Cambiar contraseña</a>
+                    <a href="#">Ayuda y contacto</a>
+                </nav>
+                <div class="logout-section">
+                    <a href="{% url 'account_logout' %}" class="logout-btn">Cerrar sesión</a>
+                </div>
+            </aside>
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Edita tu perfil de usuario:</strong>
+                    </header>
+                    <div class="card-body">
+                        <div class="text-right">
+                            {% if userprofile.profile_picture %}
+                                <img src="{{ userprofile.profile_picture.url }}" alt="Imagen de Perfil" width="100" style="border-radius:50px;">
+                            {% else %}
+                                <img src="{% static 'images/default_profile_picture.svg' %}" alt="Imagen de Perfil" width="100" style="border-radius:50px;">
+                            {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="first_name">Nombre(s)</label>
+                                            {{ user_form.first_name }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="last_name">Apellido(s)</label>
+                                            {{ user_form.last_name }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="phone_number">Teléfono</label>
+                                            {{ user_form.phone_number }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="profile_picture">Imagen de perfil</label>
+                                            {{ profile_form.profile_picture }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="address_line_1">Dirección</label>
+                                            {{ profile_form.address_line_1 }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="address_line_2">Detalles de dirección</label>
+                                            {{ profile_form.address_line_2 }}
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="country">País</label>
+                                            {{ profile_form.country }}
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="city">Ciudad</label>
+                                            {{ profile_form.city }}
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="state">Estado</label>
+                                            {{ profile_form.state }}
+                                        </div>
+                                    </div>
+                                    <input type="submit" value="Guardar cambios" class="btn btn-primary">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}
