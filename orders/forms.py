@@ -10,7 +10,7 @@ class OrderForm(forms.ModelForm):
         fields = [
             'first_name', 'last_name', 'phone', 
             'email', 'address_line_1', 'address_line_2', 
-            'country', 'city', 'state', 'order_note'
+            'country', 'city', 'state'
         ]
     
     # Widgets personalizados para mejorar la presentación

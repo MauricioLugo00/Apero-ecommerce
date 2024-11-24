@@ -1,19 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import F, Sum
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from store.models import Product, Variation
 from .models import Cart, CartItem
 from django.db import transaction
 from django.contrib import messages
+from django.contrib.sessions.models import Session
 from decimal import Decimal
-
 
 # Función para obtener el ID del carrito desde la sesión
 def _cart_id(request):
     cart = request.session.session_key
     if not cart:
-        cart = request.session.create()
+        request.session.create()
+        cart = request.session.session_key
     return cart
 
 # Función para agregar un producto al carrito
@@ -40,42 +42,48 @@ def add_cart(request, product_id):
         cart_item, created = CartItem.objects.get_or_create(
             product=product,
             user=current_user,
-            defaults={'quantity': 0}
+            defaults={'quantity': 1}
         )
-        
         if not created:
-            existing_variations = cart_item.variation.all()
-            if set(product_variation) == set(existing_variations):
-                cart_item.quantity = F('quantity') + 1
-                cart_item.save()
-                return redirect('cart')
-        
-        cart_item.quantity = 1
-        cart_item.save()
-        if product_variation:
-            cart_item.variation.clear()
-            cart_item.variation.add(*product_variation)
-            
+            if set(cart_item.variation.all()) == set(product_variation):
+                if cart_item.quantity + 1 <= product.stock:  # Verificar stock antes de incrementar
+                    cart_item.quantity = F('quantity') + 1
+                else:
+                    messages.error(request, "Stock insuficiente")
+                    return redirect('cart')
+            else:
+                cart_item = CartItem.objects.create(
+                    product=product,
+                    user=current_user,
+                    quantity=1
+                )
+            cart_item.save()
+            cart_item.variation.set(product_variation)
     else:
-        cart, _ = Cart.objects.get_or_create(cart_id=_cart_id(request))
+        cart, created = Cart.objects.get_or_create(cart_id=_cart_id(request))
         cart_item, created = CartItem.objects.get_or_create(
             product=product,
             cart=cart,
             defaults={'quantity': 1}
         )
-        
         if not created:
-            existing_variations = cart_item.variation.all()
-            if set(product_variation) == set(existing_variations):
-                cart_item.quantity = F('quantity') + 1
-                cart_item.save()
-                return redirect('cart')
-            
-        if product_variation:
-            cart_item.variation.clear()
-            cart_item.variation.add(*product_variation)
-
+            if set(cart_item.variation.all()) == set(product_variation):
+                if cart_item.quantity + 1 <= product.stock:  # Verificar stock antes de incrementar
+                    cart_item.quantity = F('quantity') + 1
+                else:
+                    messages.error(request, "Stock insuficiente")
+                    return redirect('cart')
+            else:
+                cart_item = CartItem.objects.create(
+                    product=product,
+                    cart=cart,
+                    quantity=1
+                )
+            cart_item.save()
+            cart_item.variation.set(product_variation)
     return redirect('cart')
+
+
 
 # Función para remover un producto del carrito
 @transaction.atomic
@@ -111,28 +119,29 @@ def remove_cart_item(request, product_id, cart_item_id):
 # Función para mostrar el contenido del carrito
 def cart(request):
     try:
-        tax_rate = Decimal('0.16')  # Convert to Decimal instead of float
+        tax_rate = Decimal('0.16')
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
 
-        totals = cart_items.aggregate(
-            total=Sum(F('product__price') * F('quantity')),
-            quantity=Sum('quantity')
-        )
+        # Calcula los totales usando el método sub_total
+        total = Decimal('0')
+        quantity = 0
         
-        total = totals['total'] or Decimal('0')  # Use Decimal('0') instead of 0
-        quantity = totals['quantity'] or 0
+        for item in cart_items:
+            total += item.sub_total
+            quantity += item.quantity
+        
         tax = round(tax_rate * total, 2)
         grand_total = total + tax
 
     except ObjectDoesNotExist:
-        total = Decimal('0')  # Use Decimal('0')
+        total = Decimal('0')
         quantity = 0
-        tax = Decimal('0')  # Use Decimal('0')
-        grand_total = Decimal('0')  # Use Decimal('0')
+        tax = Decimal('0')
+        grand_total = Decimal('0')
         cart_items = []
 
     context = {
@@ -147,7 +156,7 @@ def cart(request):
 
 
 # Función para realizar el checkout
-@login_required(login_url='login')
+@login_required(login_url='account_login')
 def checkout(request):
     total = Decimal('0')
     quantity = 0
@@ -183,12 +192,11 @@ def checkout(request):
         return redirect('store')
 
     context = {
-        'total': total,
-        'quantity': quantity,
         'cart_items': cart_items,
+        'total': total,
         'tax': tax,
         'grand_total': grand_total,
+        'PAYPAL_CLIENT_ID': settings.PAYPAL_CLIENT_ID,  # Añade esto
     }
-
     return render(request, 'store/checkout.html', context)
 

@@ -2,6 +2,8 @@ from django.db import models
 from store.models import Product, Variation
 from accounts.models import Account
 from django.core.validators import MinValueValidator
+from decimal import Decimal
+
 
 # Modelo para el carrito de compras
 class Cart(models.Model):
@@ -37,3 +39,8 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity}x {self.product.product_name}'  # Representación en cadena del ítem del carrito
+    
+    @property
+    def sub_total(self):
+        """Calcula el subtotal para este ítem del carrito"""
+        return Decimal(str(self.product.price)) * Decimal(str(self.quantity))

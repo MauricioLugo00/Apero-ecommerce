@@ -9,7 +9,6 @@ class CustomSignupForm(SignupForm):
     last_name = forms.CharField(max_length=50, label='Apellido')
     phone_number = forms.CharField(max_length=15, label='Número de teléfono', required=False)
 
-    # Método save personalizado para guardar información adicional del usuario
     def save(self, request):
         user = super().save(request)
         user.first_name = self.cleaned_data['first_name']
@@ -17,10 +16,11 @@ class CustomSignupForm(SignupForm):
         user.phone_number = self.cleaned_data['phone_number']
         user.save()
         
-        # Crear perfil de usuario asociado
-        UserProfile.objects.create(user=user)
+        # Crear perfil de usuario asociado si no existe
+        UserProfile.objects.get_or_create(user=user)
         
         return user
+
 
 # Formulario para editar la información básica del usuario
 class UserForm(forms.ModelForm):

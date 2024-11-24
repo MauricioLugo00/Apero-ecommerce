@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Login</title>
 </head>
-<body>
-    <a href="{% url 'home' %}" class="exit"><img src="{% static 'images/exit.svg' %}" alt="pestaña de inicio"></a>
+<body> 
     <img class="vaso_zanahoria" src="{% static 'images/vasoZanahoria.svg' %}" alt="vaso de zanahoria">
     <div class="right_login">
+        
         <h2>Ingresar a Apero</h2>
         <form action="" method="post" class="login-form">
             {% csrf_token %}

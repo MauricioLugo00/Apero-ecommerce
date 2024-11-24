@@ -13,8 +13,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('carts/', include('carts.urls')),  # Incluir URLs de la app carts
     path('store/', include('store.urls')),  # Incluir URLs de la app store
-    # path('categories/', include('categories.urls')),  # Descomentar si decides habilitar la app categories
-    # path('orders/', include('orders.urls')),  # Descomentar si decides habilitar la app orders
+    path('orders/', include('orders.urls')), 
 ]
 
 if settings.DEBUG:
