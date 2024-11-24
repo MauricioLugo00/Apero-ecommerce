@@ -15,11 +15,9 @@ class CustomSignupForm(SignupForm):
         user.last_name = self.cleaned_data['last_name']
         user.phone_number = self.cleaned_data['phone_number']
         user.save()
-        
-        # Crear perfil de usuario asociado
-        UserProfile.objects.create(user=user)
-        
         return user
+
+
 
 # Formulario para editar la información básica del usuario
 class UserForm(forms.ModelForm):

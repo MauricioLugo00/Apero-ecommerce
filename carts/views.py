@@ -6,6 +6,8 @@ from store.models import Product, Variation
 from .models import Cart, CartItem
 from django.db import transaction
 from django.contrib import messages
+from decimal import Decimal
+
 
 # Función para obtener el ID del carrito desde la sesión
 def _cart_id(request):
@@ -109,7 +111,7 @@ def remove_cart_item(request, product_id, cart_item_id):
 # Función para mostrar el contenido del carrito
 def cart(request):
     try:
-        tax_rate = 0.16  # 16%
+        tax_rate = Decimal('0.16')  # Convert to Decimal instead of float
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
@@ -121,13 +123,16 @@ def cart(request):
             quantity=Sum('quantity')
         )
         
-        total = totals['total'] or 0
+        total = totals['total'] or Decimal('0')  # Use Decimal('0') instead of 0
         quantity = totals['quantity'] or 0
         tax = round(tax_rate * total, 2)
         grand_total = total + tax
 
     except ObjectDoesNotExist:
-        total = quantity = tax = grand_total = 0
+        total = Decimal('0')  # Use Decimal('0')
+        quantity = 0
+        tax = Decimal('0')  # Use Decimal('0')
+        grand_total = Decimal('0')  # Use Decimal('0')
         cart_items = []
 
     context = {
@@ -140,47 +145,42 @@ def cart(request):
 
     return render(request, 'store/cart.html', context)
 
+
 # Función para realizar el checkout
 @login_required(login_url='login')
 def checkout(request):
-    total = 0
+    total = Decimal('0')
     quantity = 0
-    tax = 0
-    grand_total = 0
+    tax = Decimal('0')
+    grand_total = Decimal('0')
     cart_items = []
 
     try:
-        # Si el usuario está autenticado, usamos su carrito
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
-            # Para usuarios no autenticados, se utiliza el carrito basado en session
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
 
-        # Si no hay elementos en el carrito, mostramos un mensaje de advertencia o redirigimos
         if not cart_items:
             messages.warning(request, "Tu carrito está vacío.")
-            return redirect('store')  # O cualquier vista de tu elección.
+            return redirect('store')
 
-        # Utilizamos `aggregate()` para calcular `total` y `quantity` de manera más eficiente
         cart_summary = cart_items.aggregate(
-            total=Sum(F('product__price') * F('quantity')),  # Cálculo del total
-            quantity=Sum('quantity')  # Sumar todas las cantidades
+            total=Sum(F('product__price') * F('quantity')),
+            quantity=Sum('quantity')
         )
         
-        # Si hay resultados, actualizamos las variables
         if cart_summary['total']:
             total = cart_summary['total']
             quantity = cart_summary['quantity']
         
-        # Calculamos el impuesto (en este caso, 16%)
-        tax = round(0.16 * total, 2)
+        tax = round(Decimal('0.16') * total, 2)  # Use Decimal('0.16') instead of 0.16
         grand_total = total + tax
 
     except ObjectDoesNotExist:
         messages.error(request, "Hubo un problema al obtener tu carrito.")
-        return redirect('store')  # Redirigir si el carrito no se encuentra.
+        return redirect('store')
 
     context = {
         'total': total,

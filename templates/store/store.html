@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+    <!-- Sección de cabecera -->
+    <section class="page-header">
+        <h1>Tus gustos, tu tipo</h1>
+        <br>
+        <p style="color: white;">¡Elige el tipo de bebida que prefieras, desde bebidas naturales <br>
+             hasta potenciadores de energía naturales como el café!</p>
+    </section>
+
+    <!-- Sección principal de contenido -->
+    <section class="store-content">
+        <div class="store-container">
+            <!-- Barra lateral de filtros -->
+            <div class="filters-panel">
+                <button class="filters-toggle">
+                    <i class="fas fa-filter"></i> Filtrar Bebidas
+                </button>
+                <div class="filters-content">
+                    <!-- Categorías principales -->
+                    <div class="filter-box">
+                        <div class="filter-header">
+                            <h3>Categorías</h3>
+                        </div>
+                        <div class="filter-content">
+                            <ul>
+                                <li><a href="{% url 'store' %}" class="category-tag">Mostrar Todas</a></li>
+                                {% for category in links %}
+                                    <li><a href="{{ category.get_url }}" class="category-tag">{{ category.category_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+            
+                    <!-- Tipos de Bebidas -->
+                    <div class="filter-box">
+                        <div class="filter-header">
+                            <h3>Tipos de Bebidas</h3>
+                        </div>
+                        <div class="filter-content">
+                            <div class="drink-options">
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="bebidas-cremosas">
+                                    <span>Bebidas Cremosas</span>
+                                </label>
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="jugos-naturales">
+                                    <span>Jugos Naturales</span>
+                                </label>
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="bebidas-frias">
+                                    <span>Bebidas Frías</span>
+                                </label>
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="bebidas-calientes">
+                                    <span>Bebidas Calientes</span>
+                                </label>
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="licores">
+                                    <span>Licores</span>
+                                </label>
+                                <label class="drink-type">
+                                    <input type="checkbox" name="drink-type" value="cocteles">
+                                    <span>Cocteles</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Filtro de precios -->
+                    <div class="filter-box">
+                        <div class="filter-header">
+                            <h3>Rango de Precios</h3>
+                        </div>
+                        <div class="filter-content">
+                            <form class="price-filter">
+                                <div class="price-inputs">
+                                    <div class="price-field">
+                                        <label for="min-price">Mínimo</label>
+                                        <select id="min-price" name="min-price">
+                                            <option value="0">$0</option>
+                                            <option value="10">$10</option>
+                                            <option value="20">$20</option>
+                                            <option value="30">$30</option>
+                                            <option value="40">$40</option>
+                                            <option value="50">$50</option>
+                                        </select>
+                                    </div>
+                                    <div class="price-field">
+                                        <label for="max-price">Máximo</label>
+                                        <select id="max-price" name="max-price">
+                                            <option value="20">$20</option>
+                                            <option value="30">$30</option>
+                                            <option value="40">$40</option>
+                                            <option value="50">$50</option>
+                                            <option value="75">$75</option>
+                                            <option value="100">$100+</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit">
+                                    <i class="fas fa-search"></i> Aplicar Filtros
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área principal de productos -->
+            <div class="products-area">
+                <!-- Cabecera de resultados -->
+                <header class="results-header">
+                    <div class="results-info">
+                        <i class="fas fa-cocktail"></i>
+                        <span>{{ product_count }} Bebidas Encontradas</span>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-toggle grid-view active" title="Vista en cuadrícula">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-toggle list-view" title="Vista en lista">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Grid de productos -->
+                <div class="products-grid">
+                    {% if products %}
+                        {% for product in products %}
+                            <article class="product-card">
+                                <div class="product-image">
+                                    <a href="{{ product.get_url }}">
+                                        <img src="{{ product.images.url }}" alt="{{ product.product_name }}">
+                                    </a>
+                                    <div class="product-tags">
+                                        {% if product.is_available %}
+                                            <span class="tag available">Disponible</span>
+                                        {% else %}
+                                            <span class="tag sold-out">Agotado</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h2><a href="{{ product.get_url }}">{{ product.product_name }}</a></h2>
+                                    <div class="product-meta">
+                                        <div class="product-category">
+                                            <i class="fas fa-tag"></i>
+                                            <span>{{ product.category.category_name }}</span>
+                                        </div>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <span>4.5</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <span class="current-price">${{ product.price }}</span>
+                                        {% if product.old_price %}
+                                            <span class="old-price">${{ product.old_price }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{% url 'add_cart' product.id %}" class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        Agregar al Carrito
+                                    </a>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <h2>Lo sentimos! el producto no está disponible :c </h2>
+                            <p>Intenta con otros filtros o categorías</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Paginación -->
+                {% if products.has_other_pages %}
+                    <nav class="pagination">
+                        <ul>
+                            {% if products.has_previous %}
+                                <li><a href="?page={{ products.previous_page_number }}">
+                                    <i class="fas fa-chevron-left"></i> Anterior
+                                </a></li>
+                            {% else %}
+                                <li class="disabled"><span>
+                                    <i class="fas fa-chevron-left"></i> Anterior
+                                </span></li>
+                            {% endif %}
+
+                            {% for i in products.paginator.page_range %}
+                                {% if products.number == i %}
+                                    <li class="active"><span>{{ i }}</span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if products.has_next %}
+                                <li><a href="?page={{ products.next_page_number }}">
+                                    Siguiente <i class="fas fa-chevron-right"></i>
+                                </a></li>
+                            {% else %}
+                                <li class="disabled"><span>
+                                    Siguiente <i class="fas fa-chevron-right"></i>
+                                </span></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <script>
+        // Toggle de filtros
+        document.querySelector('.filters-toggle').addEventListener('click', function() {
+            document.querySelector('.filters-panel').classList.toggle('active');
+        });
+
+        // Toggle de vista (grid/list)
+        document.querySelectorAll('.view-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.view-toggle').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (this.classList.contains('list-view')) {
+                    document.querySelector('.products-grid').classList.add('list-layout');
+                } else {
+                    document.querySelector('.products-grid').classList.remove('list-layout');
+                }
+            });
+        });
+    </script>    
+</main>
+{% endblock %}
