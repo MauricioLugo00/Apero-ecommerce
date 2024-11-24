@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+from .forms import ContactForm
 from .forms import UserForm, UserProfileForm, CustomSignupForm
 from .models import UserProfile
 from orders.models import Order
@@ -122,3 +126,46 @@ def edit_profile(request):
     }
     return render(request, 'accounts/edit_profile.html', context)  # Renderizar la plantilla de edición de perfil con el contexto
 
+def contact(request):
+    if request.method == 'POST' and not request.user.is_authenticated:
+        request.session['pending_contact_message'] = {
+            'subject': request.POST.get('subject', ''),
+            'message': request.POST.get('message', '')
+        }
+        messages.info(request, 'Por favor inicia sesión para enviar tu mensaje')
+        return redirect(f"{reverse('account_login')}?next={reverse('contact')}")
+
+    if request.user.is_authenticated and request.session.get('pending_contact_message'):
+        initial_data = request.session.get('pending_contact_message')
+        del request.session['pending_contact_message']
+    else:
+        initial_data = {'subject': '', 'message': ''}
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.user = request.user
+            contact.save()
+            
+            # Enviar email
+            send_mail(
+                subject=f'Un cliente de Apero envio un nuevo mensaje! {contact.subject}',
+                message=f'''
+                Cliente: {request.user.email}
+                Asunto: {contact.subject}
+                
+                Mensaje:
+                {contact.message}
+                ''',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.EMAIL_HOST_USER],  
+                fail_silently=False,
+            )
+            
+            messages.success(request, 'Tu mensaje ha sido enviado exitosamente')
+            return redirect('contact')
+    else:
+        form = ContactForm(initial=initial_data)
+
+    return render(request, 'accounts/contact.html', {'form': form})

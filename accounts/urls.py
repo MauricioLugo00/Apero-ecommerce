@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('my_orders/', views.my_orders, name='my_orders'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
+    path('contact/', views.contact, name='contact'),
+
     
     # Vistas personalizadas que sobrescriben allauth
     path('signup/', CustomSignupView.as_view(), name='account_signup'),

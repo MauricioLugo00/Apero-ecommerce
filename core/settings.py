@@ -126,7 +126,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'email',
         ],
         'AUTH_PARAMS': {
-            'redirect_uri': 'http://localhost:8000/accounts/github/login/callback/'  # Asegúrate de que esto coincida con la configuración en GitHub
+            'redirect_uri': 'http://localhost:8000/accounts/github/login/callback/'
         }
     }
 }

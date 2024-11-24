@@ -112,3 +112,14 @@ class UserProfile(models.Model):
     # Método para obtener la dirección completa del perfil
     def full_address(self):
         return f'{self.address_line_1} {self.address_line_2}'
+    
+class ContactMessage(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.subject} - {self.user.email if self.user else "Usuario no registrado"}'
+

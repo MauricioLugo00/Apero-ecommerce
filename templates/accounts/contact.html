@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<div class="contact-container">
+    <div class="contact-content">
+        <div class="image-section">
+            <img class="vaso-mora" src="{% static 'images/vasoMora.svg' %}" alt="vaso de mora">
+        </div>
+        
+        <div class="form-section">
+            <h2>Contáctanos</h2>
+            
+            {% if user.is_authenticated %}
+            <p class="user-email">¡Hola {{ user.username }}! En Apero, estamos encantados de asistirte.</p>
+            {% endif %}
+            
+            <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.subject.id_for_label }}">Asunto</label>
+                    {{ form.subject }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.message.id_for_label }}">Mensaje</label>
+                    {{ form.message }}
+                </div>
+                <button type="submit" class="submit-button">Enviar mensaje</button>
+            </form>
+            
+            <p class="brand-signature">Apero</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
