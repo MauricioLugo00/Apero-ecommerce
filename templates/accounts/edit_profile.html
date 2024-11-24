@@ -15,7 +15,7 @@
                     <a href="{% url 'my_orders' %}">Mis órdenes de compra</a>
                     <a href="#" class="active">Editar perfil</a>
                     <a href="{% url 'account_change_password' %}">Cambiar contraseña</a>
-                    <a href="#">Ayuda y contacto</a>
+                    <a href="{% url 'contact' %}">Ayuda y contacto</a>
                 </nav>
                 <div class="logout-section">
                     <a href="{% url 'account_logout' %}" class="logout-btn">Cerrar sesión</a>
@@ -74,6 +74,10 @@
                                     <label for="state">Estado</label>
                                     {{ profile_form.state }}
                                 </div>
+                                <div class="form-group">
+                                    <label for="email_management">Gestión de Email</label>
+                                    <a href="{% url 'account_email' %}" class="btn-email-management">Gestionar Email</a>
+                                </div>
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn">Guardar cambios</button>
@@ -86,3 +90,4 @@
     </div>
 </section>
 {% endblock %}
+

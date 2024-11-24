@@ -33,43 +33,33 @@ body {
     0% {
         transform: translateX(300%);
     }
-
     15% {
         transform: translateX(0) rotate(-40deg);
     }
-
     25% {
         transform: translateX(0);
     }
-
     35% {
         transform: translateX(-10%);
     }
-
     50% {
         transform: translateX(10%);
     }
-
     59% {
         transform: translateY(0);
     }
-
     60% {
         transform: translateY(-10%);
     }
-
     61% {
         transform: translateY(0);
     }
-
     62% {
         transform: translateY(-10%);
     }
-
     63% {
         transform: translateY(0);
     }
-
     100% {
         transform: translateX(0);
     }
@@ -84,26 +74,33 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .right_signup h2 {
     padding-bottom: 32px;
+    color: #333;
 }
 
-.right_signup form {
+.signup-form {
     display: flex;
     flex-direction: column;
     width: 50%;
+    gap: 15px;
 }
 
-.right_signup form div:nth-child(n) {
-    color: #7C838A;
+.form-field {
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
+    gap: 5px;
 }
 
-.right_signup form div:nth-child(n) input {
+.form-field label {
+    color: #7C838A;
+    font-size: 14px;
+}
+
+.form-field input {
     background-color: #FDDCF5;
     padding: 14px 30px;
     font-family: Poppins, sans-serif;
@@ -112,11 +109,40 @@ body {
     border-radius: 15px;
 }
 
-.right_signup form div:nth-child(6) .helptext {
+.form-field.field-error input {
+    border: 1px solid #ff4444;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.non-field-errors {
+    color: #ff4444;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.helptext {
+    color: #7C838A;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.helptext a {
+    color: #55003B;
+    text-decoration: none;
+}
+
+/* Ocultar el helptext específico de la contraseña */
+.form-field:has(input[name="password1"]) .helptext {
     display: none;
 }
 
-.right_signup form input:nth-child(8) {
+#submit {
     align-self: center;
     width: 50%;
     margin-top: 32px;
@@ -127,48 +153,78 @@ body {
     padding: 9px 25px;
     cursor: pointer;
     border-radius: 4px;
-    border-style: none;
+    border: none;
     background-color: #FFAAE5;
     color: #FFFFFF;
+    transition: background-color 0.3s ease;
 }
 
-.right_signup p {
+#submit:hover {
+    background-color: #ff95db;
+}
+
+.right_signup > p {
     color: #7C838A;
+    margin-top: 15px;
 }
 
-.right_signup p a {
+.right_signup > p a {
     text-decoration: none;
     color: #FFAAE5;
 }
 
-.right_signup .o {
-    margin: 12px 0;
+.apero {
+    position: absolute;
+    bottom: 3%;
+    color: #7C838A;
 }
 
-.right_signup a:nth-child(5) {
+.o {
+    margin: 12px 0;
+    color: #7C838A;
+}
+
+.github {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-wrap: nowrap;
-    width: 20%;
+    gap: 10px;
+    width: auto;
     margin-top: 32px;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 16px;
     text-decoration: none;
-    padding: 5px 105px;
+    padding: 8px 25px;
     cursor: pointer;
     border-radius: 15px;
-    border-style: none;
-    border: solid 1px #7C838A;
+    border: 1px solid #7C838A;
     color: #7C838A;
+    transition: all 0.3s ease;
 }
 
-.right_signup a:nth-child(5) img {
-    padding-right: 20px;
+.github:hover {
+    background-color: #f5f5f5;
 }
 
-.right_signup .apero {
-    position: absolute;
-    top: 97%;
+.github img {
+    padding-right: 10px;
+}
+
+.github p {
+    margin: 0;
+}
+
+/* Estilos para los mensajes de error */
+.errorlist {
+    list-style: none;
+    color: #ff4444;
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 0;
+}
+
+/* Ajustes para campos específicos */
+.form-field:has(input[type="email"]) input {
+    text-transform: lowercase;
 }

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/email.css' %}">
+<div class="email-container">
+    <div class="email-content">
+        <h1>Gestión de Email</h1>
+
+        {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'account_email' %}" class="email-form">
+            {% csrf_token %}
+            
+            <div class="current-emails">
+                {% for emailaddress in user.emailaddress_set.all %}
+                <div class="email-row">
+                    <label>
+                        <input type="radio" name="email" 
+                               {% if emailaddress.primary %}checked{% endif %} 
+                               value="{{ emailaddress.email }}"/>
+                        {{ emailaddress.email }}
+                        
+                        <div class="email-badges">
+                            {% if emailaddress.verified %}
+                                <span class="badge verified">Verificado</span>
+                            {% else %}
+                                <span class="badge unverified">No verificado</span>
+                            {% endif %}
+                            {% if emailaddress.primary %}
+                                <span class="badge primary">Principal</span>
+                            {% endif %}
+                        </div>
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="button-group">
+                <button type="submit" name="action_primary">Establecer como principal</button>
+                <button type="submit" name="action_send">Reenviar verificación</button>
+                <button type="submit" name="action_remove" class="delete-button">Eliminar</button>
+            </div>
+        </form>
+
+        <div class="add-email">
+            <h2>Añadir Email</h2>
+            <form method="POST" action="{% url 'account_email' %}">
+                {% csrf_token %}
+                {{ form.email }}
+                {% if form.email.errors %}
+                <div class="error">
+                    {{ form.email.errors }}
+                </div>
+                {% endif %}
+                <button type="submit" name="action_add">Añadir email</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

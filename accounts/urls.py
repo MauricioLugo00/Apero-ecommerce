@@ -1,7 +1,15 @@
 from django.urls import path
 from . import views
 from .views import CustomSignupView, CustomLoginView
-from allauth.account.views import LogoutView, PasswordResetView, PasswordChangeView, EmailView, ConfirmEmailView, EmailVerificationSentView
+from allauth.account.views import (
+    LogoutView, 
+    PasswordResetView, 
+    PasswordResetDoneView,  
+    PasswordChangeView, 
+    EmailView, 
+    ConfirmEmailView, 
+    EmailVerificationSentView
+)
 
 urlpatterns = [
     # Vistas personalizadas desde views.py
@@ -39,4 +47,8 @@ urlpatterns = [
     path('email/', EmailView.as_view(
         template_name='accounts/email.html'
     ), name='account_email'),
+
+    path('password/reset/done/', PasswordResetDoneView.as_view(
+        template_name='accounts/password_reset_done.html'
+    ), name='account_reset_password_done'),
 ]

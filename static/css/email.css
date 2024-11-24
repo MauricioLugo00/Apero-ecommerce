@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #FF69B4;
+    --primary-light: #FFB6E3;
+    --primary-dark: #FF1493;
+    --text-dark: #333;
+    --text-light: #666;
+    --white: #fff;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Importación de fuentes y variables ya definidas en el root */
+
+.email-container {
+    font-family: 'Poppins', sans-serif;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+}
+
+.email-content h1 {
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.message-container {
+    background-color: var(--gray-100);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+}
+
+.message-container p {
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.email-form {
+    margin-bottom: 2rem;
+}
+
+.current-emails {
+    margin-bottom: 2rem;
+}
+
+.email-row {
+    padding: 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.email-row:hover {
+    background-color: var(--gray-100);
+}
+
+.email-row label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
+.email-row input[type="radio"] {
+    margin-right: 1rem;
+    accent-color: var(--primary-color);
+}
+
+.email-badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge.verified {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.badge.unverified {
+    background-color: var(--gray-200);
+    color: var(--text-light);
+}
+
+.badge.primary {
+    background-color: var(--primary-dark);
+    color: var(--white);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.button-group button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.button-group button:hover {
+    background-color: var(--primary-dark);
+}
+
+.button-group .delete-button {
+    background-color: #ff4444;
+}
+
+.button-group .delete-button:hover {
+    background-color: #cc0000;
+}
+
+.add-email {
+    background-color: var(--gray-100);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.add-email h2 {
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-email form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-email input[type="email"] {
+    padding: 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+.add-email input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.add-email button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    align-self: flex-start;
+}
+
+.add-email button:hover {
+    background-color: var(--primary-dark);
+}
+
+.error {
+    color: #ff4444;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .email-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .email-row label {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .email-badges {
+        margin-top: 0.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group button {
+        width: 100%;
+    }
+}

@@ -1,1 +1,70 @@
-<h1>SOLO CREE ESTO PORQUE SI, ESTE SI LO HACES TU TONTOLIA</h1>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+<section class="section-conten">
+    <div class="container">
+        <div class="dashboard-layout">
+            <!-- Panel Lateral -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Mi panel</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="{% url 'dashboard' %}">Mi panel</a>
+                    <a href="{% url 'my_orders' %}" class="active">Mis órdenes de compra</a>
+                    <a href="{% url 'edit_profile' %}">Editar perfil</a>
+                    <a href="{% url 'account_change_password' %}">Cambiar contraseña</a>
+                    <a href="{% url 'contact' %}">Ayuda y contacto</a>
+                </nav>
+                <div class="logout-section">
+                    <a href="{% url 'account_logout' %}" class="logout-btn">Cerrar sesión</a>
+                </div>
+            </aside>
+
+            <!-- Contenido Principal -->
+            <main class="main-content">
+                <article class="dashboard-card">
+                    <header class="card-header">
+                        <strong>Mis órdenes de compra</strong>
+                    </header>
+                    <div class="card-body">
+                        <div class="orders-table-container">
+                            {% if orders %}
+                                <table class="orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Número de orden</th>
+                                            <th>Nombre de facturación</th>
+                                            <th>Teléfono</th>
+                                            <th>Total de la orden</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                            <tr>
+                                                <td class="order-number">{{ order.order_number }}</td>
+                                                <td>{{ order.full_name }}</td>
+                                                <td>{{ order.phone }}</td>
+                                                <td class="order-total">${{ order.order_total }}</td>
+                                                <td>{{ order.created_at }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <div class="no-orders">
+                                    <p>No tienes órdenes de compra realizadas.</p>
+                                    <a href="{% url 'store' %}" class="shop-now-btn">Ir a la tienda</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+</section>
+{% endblock %}

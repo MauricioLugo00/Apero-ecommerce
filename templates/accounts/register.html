@@ -12,15 +12,38 @@
     <img class="vaso_mora" src="{% static 'images/vasoMora.svg' %}" alt="vaso de mora">
     <div class="right_signup">
         <h2>Crear cuenta Apero</h2>
-        <form action="" method="post">
+        <form action="" method="post" class="signup-form">
             {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Crear cuenta">
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+            {% for field in form %}
+                <div class="form-field {% if field.errors %}field-error{% endif %}">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text and not field.name == 'password1' %}
+                        <div class="helptext">{{ field.help_text }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Crear cuenta" id="submit">
         </form>
         <p>¿Ya tienes una cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
         <p class="o">- O -</p>
         {% load socialaccount %}
-        <a href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Crear con GitHub"><p>Crear con GitHub</p></a>
+        <a class="github" href="{% provider_login_url 'github' %}">
+            <img src="{% static 'images/GitHub.svg' %}" alt="Crear con GitHub">
+            <p>Crear con GitHub</p>
+        </a>
         <p class="apero">Apero</p>
     </div>
 </body>

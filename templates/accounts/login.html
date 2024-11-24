@@ -12,11 +12,15 @@
     <img class="vaso_zanahoria" src="{% static 'images/vasoZanahoria.svg' %}" alt="vaso de zanahoria">
     <div class="right_login">
         <h2>Ingresar a Apero</h2>
-        <form action="" method="post">
+        <form action="" method="post" class="login-form">
             {% csrf_token %}
-            {{ form.non_field_errors }}
+            {% if form.non_field_errors %}
+            <div class="non-field-errors">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
             {% for field in form %}
-                <div id="form-field" class="form-field">
+                <div class="form-field {% if field.errors %}field-error{% endif %}">
                     {{ field.label_tag }}
                     {{ field }}
                     {% if field.errors %}
@@ -26,15 +30,21 @@
                             {% endfor %}
                         </div>
                     {% endif %}
+                    {% if field.help_text %}
+                        <div class="helptext">{{ field.help_text }}</div>
+                    {% endif %}
                 </div>
             {% endfor %}
             <input id="submit" type="submit" value="Entrar">
         </form>
         <p>¿Aún no tienes cuenta? <a href="{% url 'account_signup' %}">Registrarme</a></p>
-        <p class="apero">Apero</p>
         <p class="o">- O -</p>
         {% load socialaccount %}
-        <a class="github" href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Ingresar con GitHub"><p>Ingresar con GitHub</p></a>
+        <a class="github" href="{% provider_login_url 'github' %}">
+            <img src="{% static 'images/GitHub.svg' %}" alt="Ingresar con GitHub">
+            <p>Ingresar con GitHub</p>
+        </a>
+        <p class="apero">Apero</p>
     </div>
 <script src="../../static/js/login.js"></script>
 </body>
