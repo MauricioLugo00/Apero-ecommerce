@@ -20,7 +20,7 @@
         <p>¿Ya tienes una cuenta? <a href="{% url 'account_login' %}">Entrar</a></p>
         <p class="o">- O -</p>
         {% load socialaccount %}
-        <a href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Crear con GitHub"></a>
+        <a href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Crear con GitHub"><p>Crear con GitHub</p></a>
         <p class="apero">Apero</p>
     </div>
 </body>

@@ -9,10 +9,10 @@
 </head>
 <body>
     <a href="{% url 'home' %}" class="exit"><img src="{% static 'images/exit.svg' %}" alt="pestaña de inicio"></a>
-    <img class="vaso_smirnoff" src="{% static 'images/vasoSmirnoff.svg' %}" alt="vaso de zanahoria">
+    <img class="vaso_smirnoff" src="{% static 'images/vasoKiwi.svg' %}" alt="vaso de zanahoria">
     
     <div class="container">
-        <h1>Confirmar dirección de correo electrónico</h1>
+        <h2>Confirmar dirección de correo electrónico</h2>
         
         {% if confirmation %}
             <p>Por favor, confirma que <strong>{{ confirmation.email_address.email }}</strong> es tu dirección de correo electrónico haciendo clic en el botón de abajo.</p>

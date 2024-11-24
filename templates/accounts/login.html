@@ -16,7 +16,7 @@
             {% csrf_token %}
             {{ form.non_field_errors }}
             {% for field in form %}
-                <div class="form-field">
+                <div id="form-field" class="form-field">
                     {{ field.label_tag }}
                     {{ field }}
                     {% if field.errors %}
@@ -28,10 +28,14 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <input type="submit" value="Entrar">
+            <input id="submit" type="submit" value="Entrar">
         </form>
         <p>¿Aún no tienes cuenta? <a href="{% url 'account_signup' %}">Registrarme</a></p>
         <p class="apero">Apero</p>
+        <p class="o">- O -</p>
+        {% load socialaccount %}
+        <a class="github" href="{% provider_login_url 'github' %}"><img src="{% static 'images/GitHub.svg' %}" alt="Ingresar con GitHub"><p>Ingresar con GitHub</p></a>
     </div>
+<script src="../../static/js/login.js"></script>
 </body>
 </html>

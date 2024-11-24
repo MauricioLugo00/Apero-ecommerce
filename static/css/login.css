@@ -166,5 +166,32 @@ body .right_login .apero {
     top: 97%;
 }
 
+.right_login .o {
+    margin: 12px 0;
+}
+
+.github {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-wrap: nowrap;
+    width: 20%;
+    margin-top: 32px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 5px 105px;
+    cursor: pointer;
+    border-radius: 15px;
+    border-style: none;
+    border: solid 1px #7C838A;
+    color: #7C838A;
+
+    img {
+        padding-right: 10px;
+    }
+}
 
 /* mensajes de error de credenciales */
+    
