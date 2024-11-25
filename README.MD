@@ -61,7 +61,7 @@ Desde esta interfaz de administración, podrás:
 
 ## Autoría
 
-Este proyecto fue desarrollado por **Mauricio Lugo**, **Danells Montes**, **Juan Hoyos**, **Juan Caraballo**, y **Maria Camila**. Si encuentras algún problema o tienes sugerencias para mejorar el sistema, no dudes en ponerte en contacto con nosotros.
+Este proyecto fue desarrollado por **Mauricio Lugo**. Si encuentras algún problema o tienes sugerencias para mejorar el sistema, no dudes en ponerte en contacto con nosotros.
 
 ¡Gracias por apoyar este proyecto!
 
@@ -71,7 +71,7 @@ Este proyecto fue desarrollado por **Mauricio Lugo**, **Danells Montes**, **Juan
 
 Esta sección está destinada solo para el equipo de desarrollo de Apero. A continuación se describen las aplicaciones del proyecto y sus funcionalidades.
 
-1. **Accounts (Gestionado por Mauricio Lugo)**:
+1. **Accounts**:
    Esta aplicación generalmente se encarga de todo lo relacionado con los usuarios.
    **Funcionalidades comunes**:
    - Registro y autenticación de usuarios.
@@ -80,7 +80,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Recuperación de contraseñas.
    - Permisos y roles para gestionar lo que los usuarios pueden hacer en el sistema (administradores, clientes, etc.).
 
-2. **Store (Gestionado por Mauricio Lugo)**:
+2. **Store**:
    Esta aplicación suele ser el corazón del ecommerce, ya que se encarga de la gestión de los productos que están a la venta en la tienda.
    **Funcionalidades comunes**:
    - Gestión del catálogo de productos.
@@ -89,7 +89,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Promociones y descuentos.
    - Inventario (control de stock de productos).
 
-3. **Category (Gestionado por Mauricio Lugo)**:
+3. **Category**:
    Esta aplicación es crucial para la organización de los productos. Permite que los productos se agrupen en diferentes categorías.
    **Funcionalidades comunes**:
    - Creación de categorías (como bebidas alcohólicas, vinos, cervezas, etc.).
@@ -97,7 +97,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Posibilidad de filtrar productos por categoría en el frontend del sitio web.
    - Puede incluir subcategorías para una mejor organización.
 
-4. **Carts (Gestionado por JuanJo)**:
+4. **Carts**:
    Esta aplicación gestiona el carrito de compras de los usuarios.
    **Funcionalidades comunes**:
    - Agregar, eliminar o modificar productos en el carrito.
@@ -106,7 +106,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Actualizar cantidades de productos.
    - Pasar a la compra (checkout), donde el carrito se convierte en una orden.
 
-6. **Orders (Gestionado por Juan Pablo)**:
+6. **Orders**:
    Esta aplicación gestiona todo lo relacionado con las órdenes de compra.
    **Funcionalidades comunes**:
    - Crear y guardar órdenes cuando el usuario finaliza el checkout.
@@ -114,7 +114,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Actualizar el estado de las órdenes (pendiente, pagada, enviada, entregada).
    - Puede incluir facturación o detalles de pagos.
 
-7. **Static (Gestionado por Danells)**:
+7. **Static**:
    La carpeta static es el lugar donde se almacenan los archivos estáticos del proyecto, que son archivos que no cambian según las interacciones del usuario.
    **Archivos comunes en static**:
    - CSS: para los estilos del sitio.
@@ -122,7 +122,7 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
    - Imágenes: logos, banners u otras imágenes que forman parte del diseño del sitio.
    Estos archivos son servidos directamente al navegador del usuario sin pasar por el servidor de Django.
 
-8. **Templates (Gestionado por Danells)**:
+8. **Templates**:
    La carpeta templates contiene los archivos HTML que se usan para la renderización del sitio web.
    **Funcionalidades comunes**:
    - Diseño y estructura de páginas: home, productos, categorías, carrito, checkout, etc.
@@ -132,21 +132,6 @@ Esta sección está destinada solo para el equipo de desarrollo de Apero. A cont
 9. **Otros elementos en el proyecto**:
    - **manage.py**: Este archivo es el comando de administración de Django. A través de él, puedes correr comandos como runserver, migrate, createsuperuser, entre otros.
    - **requirements.txt**: Este archivo lista todas las dependencias del proyecto, es decir, los paquetes Python que necesitas instalar (incluyendo Django).
-
-### Clonando el proyecto
-
-Para que solo el equipo pueda desarrollar, asegúrate de que el acceso al repositorio esté restringido. 
-
-1. **Clonar el repositorio en tu máquina local:**
-   ```bash
-   git clone https://github.com/MauricioLugo00/Apero-ecommerce.git
-
-2. **Crear un entorno virtual e instalar las dependencias necesarias**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-3. **Configurar la base de datos y realizar las migraciones.**
 
 
 
