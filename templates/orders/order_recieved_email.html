@@ -1,0 +1,46 @@
+<!-- orders/order_recieved_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Confirmación de Orden</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2>¡Gracias por tu compra, {{ user.first_name }}!</h2>
+        
+        <p>Tu orden ha sido procesada exitosamente.</p>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; margin: 20px 0;">
+            <h3>Detalles de la Orden:</h3>
+            <p>Número de Orden: {{ order.order_number }}</p>
+            <p>Fecha: {{ order.created_at }}</p>
+            <p>Total: ${{ order.order_total }}</p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3>Dirección de Envío:</h3>
+            <p>{{ order.full_name }}</p>
+            <p>{{ order.full_address }}</p>
+            <p>{{ order.city }}, {{ order.state }}</p>
+            <p>{{ order.country }}</p>
+            <p>Teléfono: {{ order.phone }}</p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3>Productos:</h3>
+            {% for item in order.orderproduct_set.all %}
+            <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                <p>{{ item.product.product_name }}</p>
+                <p>Cantidad: {{ item.quantity }}</p>
+                <p>Precio: ${{ item.product_price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <p>Si tienes alguna pregunta sobre tu orden, no dudes en contactarnos.</p>
+        </div>
+    </div>
+</body>
+</html>

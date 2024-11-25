@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #FF69B4;
+    --primary-light: #FFB6E3;
+    --primary-dark: #FF1493;
+    --text-dark: #333;
+    --text-light: #666;
+    --white: #fff;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Base Styles */
+.payment-container {
+    font-family: 'Poppins', sans-serif;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    color: var(--text-dark);
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+}
+
+/* Card Styles */
+.card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h2 {
+    padding: 1.25rem;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--primary-dark);
+}
+
+.card-content {
+    padding: 1.25rem;
+}
+
+.card-content p {
+    margin: 0.5rem 0;
+    color: var(--text-light);
+}
+
+/* Order Note Styles */
+.order-note {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.order-note .label {
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-right: 0.5rem;
+}
+
+/* Products Table Styles */
+.products-table {
+    width: 100%;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    font-weight: 500;
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    align-items: center;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.product-info img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-details a {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.product-details a:hover {
+    color: var(--primary-light);
+}
+
+.variations {
+    margin-top: 0.5rem;
+}
+
+.variations span {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+.price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.total-price {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.unit-price {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+/* Order Summary Styles */
+.summary-card {
+    position: sticky;
+    top: 2rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.summary-row.total {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 1.125rem;
+    border-bottom: none;
+    padding-top: 1rem;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.payment-methods img {
+    height: 30px;
+    width: auto;
+}
+
+#paypal-button-container {
+    margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .table-header {
+        display: none;
+    }
+
+    .product-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem 0;
+    }
+
+    .quantity-col, .price-col {
+        padding-left: 90px;
+    }
+
+    .product-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-info img {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+    }
+}

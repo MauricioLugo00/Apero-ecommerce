@@ -11,8 +11,8 @@
                 <h1>REFRESCA TU VIDA, UN SORBO A LA VEZ</h1>
                 <p>Encontrarás una amplia selección de opciones refrescantes y deliciosas, diseñadas para cada momento de tu día. Desde bebidas energéticas que te ayudarán a enfrentar tus retos diarios, hasta refrescos naturales llenos de sabor para relajarte y disfrutar, tenemos algo para todos los gustos.</p>
                 <div>
-                    <a href="#"><button class="buy">Comprar</button></a>
-                    <a href="#"><button class="cart">Mi carrito</button></a>
+                    <a href="{% url 'store' %}"><button class="buy">Comprar</button></a>
+                    <a href="{% url 'cart' %}"><button class="cart">Mi carrito</button></a>
                 </div>          
             </div>
             <img class="main_fresa" src="{% static 'images/vasoFresa.svg' %}" alt="vaso de fresa">

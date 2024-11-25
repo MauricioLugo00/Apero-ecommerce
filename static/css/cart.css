@@ -252,3 +252,15 @@
         text-align: right;
     }
 }
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 16px; /* Espacio entre los íconos */
+    margin-top: 16px; /* Ajusta el margen superior para separación */
+}
+
+.payment-icon {
+    width: 60px; /* Ajusta el tamaño de los íconos */
+    height: auto; /* Mantiene la proporción del icono */
+}

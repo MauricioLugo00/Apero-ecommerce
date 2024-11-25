@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.core.validators import MinValueValidator, MaxValueValidator
 from accounts.models import Account
 from categories.models import Category 
+from decimal import Decimal
+
 
 # Modelo para gestionar los productos
 class Product(models.Model):
@@ -20,7 +22,9 @@ class Product(models.Model):
 
     def average_review(self):
         reviews = ReviewRating.objects.filter(product=self, status=True)
-        return reviews.aggregate(models.Avg('rating'))['rating__avg'] or 0  # Calcula el promedio de las reseñas
+        # Asegurarse de usar Decimal para el promedio
+        avg_rating = reviews.aggregate(avg=models.Avg('rating'))['avg']
+        return Decimal(str(avg_rating or 0))
 
     def count_reviews(self):
         return ReviewRating.objects.filter(product=self, status=True).count()  # Cuenta las reseñas del producto
@@ -58,11 +62,15 @@ class ReviewRating(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)  # Usuario que escribió la reseña
     subject = models.CharField(max_length=100, blank=True)  # Asunto de la reseña
     review = models.TextField(max_length=500, blank=True)  # Contenido de la reseña
-    rating = models.FloatField()  # Calificación del producto
+    rating = models.DecimalField(
+        max_digits=4, decimal_places=2, 
+        validators=[MinValueValidator(Decimal('0.00')), MaxValueValidator(Decimal('5.00'))]
+    )  # Calificación del producto como Decimal
     status = models.BooleanField(default=True)  # Indicador de si la reseña está aprobada
 
     def __str__(self):
         return self.subject  # Representación en cadena de la reseña
+
 
 # Modelo para la galería de imágenes de productos
 class ProductGallery(models.Model):

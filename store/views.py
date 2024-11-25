@@ -11,17 +11,11 @@ from orders.models import OrderProduct
 from .forms import ReviewForm
 
 def store(request, category_slug=None):
-    """
-    Vista para mostrar la tienda con productos filtrados por categoría opcional
-    y paginación.
-    """
-    products = Product.objects.filter(is_available=True)
-    
+    products = Product.objects.filter(is_available=True, stock__gt=0)
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-    
-    # Configuración de paginación
+
     paginator = Paginator(products.order_by('id'), 6)
     page = request.GET.get('page')
     products_paginated = paginator.get_page(page)
@@ -40,7 +34,9 @@ def product_detail(request, category_slug, product_slug):
     single_product = get_object_or_404(
         Product,
         category__slug=category_slug,
-        slug=product_slug
+        slug=product_slug,
+        is_available=True,
+        stock__gt=0
     )
     
     # Verificar si el producto está en el carrito

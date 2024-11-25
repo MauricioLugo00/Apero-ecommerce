@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/payments.css' %}">
+<!-- PayPal SDK - Usando PAYPAL_CLIENT_ID desde settings.py -->
+<script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=USD&intent=capture&debug=false"></script>
+
+<div class="payment-container">
+    <div class="payment-grid">
+        <!-- Billing Details Section -->
+        <div class="payment-details">
+            <div class="card">
+                <h2>Dirección de Facturación</h2>
+                <div class="card-content">
+                    <p>{{ order.full_name }}</p>
+                    <p>{{ order.full_address }}</p>
+                    <p>{{ order.country }}, {{ order.city }}, {{ order.state }}</p>
+                    <p>{{ order.email }}</p>
+                    <p>{{ order.phone }}</p>
+                    {% if order.order_note %}
+                        <div class="order-note">
+                            <span class="label">Detalles de la orden:</span>
+                            <span>{{ order.order_note }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Product Review Section -->
+            <div class="card products-review">
+                <h2>Revisión de Productos</h2>
+                <div class="card-content">
+                    <div class="products-table">
+                        <div class="table-header">
+                            <span class="product-col">Producto(s)</span>
+                            <span class="quantity-col">Cantidad</span>
+                            <span class="price-col">Precio</span>
+                        </div>
+                        
+                        <div class="table-body">
+                            {% for cart_item in cart_items %}
+                            <div class="product-row">
+                                <div class="product-col">
+                                    <div class="product-info">
+                                        <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}">
+                                        <div class="product-details">
+                                            <a href="{{ cart_item.product.get_url }}">{{ cart_item.product.product_name }}</a>
+                                            {% if cart_item.variation.all %}
+                                                <div class="variations">
+                                                {% for item in cart_item.variation.all %}
+                                                    <span>{{ item.variation_category | capfirst }}: {{ item.variation_value | capfirst }}</span>
+                                                {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantity-col">{{ cart_item.quantity }}</div>
+                                <div class="price-col">
+                                    <div class="price-info">
+                                        <span class="total-price">${{ cart_item.sub_total }}</span>
+                                        <span class="unit-price">${{ cart_item.product.price }} cada uno</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary Section -->
+        <div class="order-summary">
+            <div class="card summary-card">
+                <h2>Resumen de Orden</h2>
+                <div class="card-content">
+                    <div class="summary-row">
+                        <span>Precio Total:</span>
+                        <span>${{ total }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Impuesto IVA (16%):</span>
+                        <span>${{ tax }}</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span>${{ grand_total }}</span>
+                    </div>
+
+                    <div id="paypal-button-container"></div>
+                    <!-- Agregamos un div para mostrar errores -->
+                    <div id="error-message" class="error-message" style="display:none; color: red; margin-top: 10px;"></div>
+                    <!-- Agregamos un loader -->
+                    <div id="payment-loader" style="display:none; text-align: center; margin-top: 10px;">
+                        Procesando pago...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var amount = "{{ grand_total }}"
+        var url = "{% url 'payments' %}"
+        var csrftoken = getCookie('csrftoken');
+        var orderID = "{{ order.order_number }}"
+        var payment_method = 'PayPal';
+        var redirect_url = "{% url 'order_complete' %}"
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: amount
+                        }
+                    }]
+                });
+            },
+
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    console.log('Capture result', orderData);
+
+                    // Enviar datos al servidor
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: JSON.stringify({
+                            orderID: orderID,
+                            transID: orderData.id,
+                            payment_method: payment_method,
+                            status: orderData.status
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = redirect_url + '?order_number=' + data.order_number + '&payment_id=' + data.transID;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Hubo un error al procesar el pago. Por favor, intente nuevamente.');
+                    });
+                });
+            },
+
+            onError: function (err) {
+                console.error('PayPal Error:', err);
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('error-message').textContent = 'Error: ' + err.message;
+                alert('Error en la conexión con PayPal. Consulte la consola para más detalles.');
+            },
+
+        }).render('#paypal-button-container');
+    </script>
+</div>
+{% endblock %}

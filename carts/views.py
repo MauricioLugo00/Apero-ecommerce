@@ -23,9 +23,9 @@ def _cart_id(request):
 def add_cart(request, product_id):
     current_user = request.user
     product = get_object_or_404(Product, id=product_id)
-    
-    # Obtener variaciones del producto
     product_variation = []
+
+    # Obtener variaciones
     if request.method == 'POST':
         for key, value in request.POST.items():
             try:
@@ -46,8 +46,10 @@ def add_cart(request, product_id):
         )
         if not created:
             if set(cart_item.variation.all()) == set(product_variation):
-                if cart_item.quantity + 1 <= product.stock:  # Verificar stock antes de incrementar
+                if cart_item.quantity + 1 <= product.stock:
                     cart_item.quantity = F('quantity') + 1
+                    cart_item.save()
+                    cart_item.refresh_from_db()  # Actualizar en memoria después de F()
                 else:
                     messages.error(request, "Stock insuficiente")
                     return redirect('cart')
@@ -57,10 +59,9 @@ def add_cart(request, product_id):
                     user=current_user,
                     quantity=1
                 )
-            cart_item.save()
             cart_item.variation.set(product_variation)
     else:
-        cart, created = Cart.objects.get_or_create(cart_id=_cart_id(request))
+        cart, _ = Cart.objects.get_or_create(cart_id=_cart_id(request))
         cart_item, created = CartItem.objects.get_or_create(
             product=product,
             cart=cart,
@@ -68,8 +69,10 @@ def add_cart(request, product_id):
         )
         if not created:
             if set(cart_item.variation.all()) == set(product_variation):
-                if cart_item.quantity + 1 <= product.stock:  # Verificar stock antes de incrementar
+                if cart_item.quantity + 1 <= product.stock:
                     cart_item.quantity = F('quantity') + 1
+                    cart_item.save()
+                    cart_item.refresh_from_db()  # Actualizar en memoria después de F()
                 else:
                     messages.error(request, "Stock insuficiente")
                     return redirect('cart')
@@ -79,7 +82,6 @@ def add_cart(request, product_id):
                     cart=cart,
                     quantity=1
                 )
-            cart_item.save()
             cart_item.variation.set(product_variation)
     return redirect('cart')
 

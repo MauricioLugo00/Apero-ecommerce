@@ -1,208 +1,124 @@
-{# store/checkout.html #}
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
-<main class="checkout-main">
-    <div class="checkout-container">
-        <h1 class="checkout-title">Finalizar Compra</h1>
-        
-        <div class="checkout-content">
-            <!-- Formulario de Envío -->
-            <div class="shipping-form">
-                <h2>Información de Envío</h2>
-                <form action="{% url 'place_order' %}" method="POST" id="orderForm">
-                    {% csrf_token %}
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first_name">Nombre</label>
-                            <input type="text" name="first_name" required value="{{ user.first_name }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name">Apellido</label>
-                            <input type="text" name="last_name" required value="{{ user.last_name }}">
-                        </div>
-                    </div>
-
+<div class="checkout-container">
+    <div class="checkout-grid">
+        <!-- Formulario de Dirección -->
+        <div class="checkout-form">
+            <h2>Dirección de envío</h2>
+            <form action="{% url 'place_order' %}" method="post">
+                {% csrf_token %}
+                
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" required value="{{ user.email }}">
+                        <label for="first_name">Nombre(s)</label>
+                        <input type="text" name="first_name" id="first_name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="last_name">Apellidos</label>
+                        <input type="text" name="last_name" id="last_name" required>
+                    </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
                     <div class="form-group">
                         <label for="phone">Teléfono</label>
-                        <input type="tel" name="phone" required>
+                        <input type="tel" name="phone" id="phone" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group full-width">
                         <label for="address_line_1">Dirección</label>
-                        <input type="text" name="address_line_1" required>
+                        <input type="text" name="address_line_1" id="address_line_1" required>
                     </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="address_line_2">Detalles de la Dirección</label>
+                        <input type="text" name="address_line_2" id="address_line_2">
+                    </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="address_line_2">Dirección Adicional (opcional)</label>
-                        <input type="text" name="address_line_2">
+                        <label for="country">País</label>
+                        <input type="text" name="country" id="country" required>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="city">Ciudad</label>
-                            <input type="text" name="city" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="state">Estado</label>
-                            <input type="text" name="state" required>
-                        </div>
-                    </div>
-
                     <div class="form-group">
-                        <label for="order_note">Notas del pedido (opcional)</label>
-                        <textarea name="order_note" rows="3"></textarea>
+                        <label for="city">Ciudad</label>
+                        <input type="text" name="city" id="city" required>
                     </div>
+                    <div class="form-group">
+                        <label for="state">CP</label>
+                        <input type="text" name="state" id="state" required>
+                    </div>
+                </div>
 
-                    <input type="hidden" name="payment_method" id="payment_method" value="">
-                </form>
-            </div>
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="order_note">Nota del cliente</label>
+                        <textarea name="order_note" id="order_note" rows="3"></textarea>
+                    </div>
+                </div>
 
-            <!-- Resumen del Pedido -->
-            <div class="order-summary">
-                <h2>Resumen del Pedido</h2>
-                <div class="order-items">
-                    {% for cart_item in cart_items %}
-                    <div class="order-item">
-                        <div class="item-image">
-                            <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}">
-                        </div>
-                        <div class="item-details">
-                            <h3>{{ cart_item.product.product_name }}</h3>
-                            {% if cart_item.variation.all %}
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Ordenar</button>
+                    <a href="{% url 'store' %}" class="btn-secondary">Continuar comprando</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Resumen de la Orden -->
+        <div class="order-summary">
+            <h2>Resumen de la Orden</h2>
+            <div class="order-items">
+                {% for cart_item in cart_items %}
+                <div class="order-item">
+                    <div class="item-image">
+                        <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}">
+                    </div>
+                    <div class="item-details">
+                        <h3>{{ cart_item.product.product_name }}</h3>
+                        {% if cart_item.variation.all %}
                             <div class="variations">
-                                {% for variation in cart_item.variation.all %}
-                                <span class="variation-tag">
-                                    {{ variation.variation_category }}: {{ variation.variation_value }}
-                                </span>
+                                {% for item in cart_item.variation.all %}
+                                    <span>{{ item.variation_category | capfirst }}: {{ item.variation_value | capfirst }}</span>
                                 {% endfor %}
                             </div>
-                            {% endif %}
-                            <p class="quantity">Cantidad: {{ cart_item.quantity }}</p>
-                            <p class="price">${{ cart_item.sub_total }}</p>
+                        {% endif %}
+                        <div class="item-price">
+                            <span class="quantity">{{ cart_item.quantity }}x</span>
+                            <span class="price">${{ cart_item.sub_total }}</span>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
+            </div>
 
-                <div class="summary-details">
-                    <div class="summary-row">
-                        <span>Subtotal</span>
-                        <span>${{ total }}</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>IVA (16%)</span>
-                        <span>${{ tax }}</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total</span>
-                        <span>${{ grand_total }}</span>
-                    </div>
+            <div class="order-totals">
+                <div class="total-row">
+                    <span>Subtotal</span>
+                    <span>${{ total }}</span>
                 </div>
-
-                <!-- PayPal Button Container -->
-                <div class="payment-section">
-                    <h3>Método de Pago</h3>
-                    <div id="paypal-button-container"></div>
+                <div class="total-row">
+                    <span>IVA (16%)</span>
+                    <span>${{ tax }}</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total</span>
+                    <span>${{ grand_total }}</span>
                 </div>
             </div>
         </div>
     </div>
-</main>
-{% endblock %}
+</div>
 
-{% block scripts %}
-<script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=MXN&components=buttons,funding-eligibility"></script>
-<script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=MXN&components=buttons,funding-eligibility&enable-funding=card,credit,paylater"></script>
-<script>
-    paypal.Buttons({
-        style: {
-            layout: 'vertical',
-            color: 'blue',
-            shape: 'rect',
-            label: 'pay'
-        },
-        
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: '{{ grand_total }}'
-                    }
-                }]
-            });
-        },
-
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                // Preparar los datos para enviar al backend
-                const paymentData = {
-                    orderID: data.orderID,
-                    transID: details.id,
-                    payment_method: details.payment_source.card ? 'Card' : 'PayPal',
-                    status: details.status
-                };
-
-                // Enviar datos al backend
-                fetch('{% url "payments" %}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                    },
-                    body: JSON.stringify(paymentData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Redireccionar a la página de orden completada
-                    window.location.href = `{% url 'order_complete' %}?order_number=${data.order_number}&payment_id=${data.transID}`;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un error al procesar el pago. Por favor, intente nuevamente.');
-                });
-            });
-        },
-
-        onError: function(err) {
-            console.error('Error:', err);
-            alert('Hubo un error al procesar el pago. Por favor, intente nuevamente.');
-        }
-    }).render('#paypal-button-container');
-</script>
-
-<style>
-    .payment-section {
-        margin-top: 20px;
-        padding: 20px;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        background-color: #fff;
-    }
-
-    .payment-section h3 {
-        margin-bottom: 15px;
-        font-size: 18px;
-        color: #333;
-    }
-
-    #paypal-button-container {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    /* Asegurar que los botones de PayPal sean visibles */
-    .paypal-buttons {
-        min-width: 200px;
-        display: block !important;
-    }
-</style>
 {% endblock %}

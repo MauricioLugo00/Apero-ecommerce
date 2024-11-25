@@ -4,6 +4,8 @@ from django.core.mail import EmailMessage
 from django.contrib import messages
 from decimal import Decimal
 from django.template.loader import render_to_string
+from django.conf import settings
+
 
 import datetime
 import json
@@ -57,9 +59,10 @@ def place_order(request):
             context = {
                 'order': order,
                 'cart_items': cart_items,
-                'total': total,
-                'tax': tax,
-                'grand_total': grand_total,
+                'total': str(total).replace(',', '.'),  # Aseguramos formato con punto
+                'tax': str(tax).replace(',', '.'),      # Aseguramos formato con punto
+                'grand_total': str(grand_total).replace(',', '.'),  # Aseguramos formato con punto
+                'PAYPAL_CLIENT_ID': settings.PAYPAL_CLIENT_ID, 
             }
             
             return render(request, 'orders/payments.html', context)
@@ -170,6 +173,8 @@ def order_complete(request):
             'transID': payment.payment_id,
             'payment': payment,
             'subtotal': subtotal,
+            'PAYPAL_CLIENT_ID': settings.PAYPAL_CLIENT_ID, 
+
         }
         
         return render(request, 'orders/order_complete.html', context)
